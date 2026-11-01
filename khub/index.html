@@ -1,0 +1,3696 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KHub</title>
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            margin: 0;
+            padding: 15px 15px 40px 15px;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .hidden {
+            display: none !important;
+        }
+        h1 {
+            font-size: 40px;
+            margin: 8px 0 5px 0;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 20px;
+            margin: 0 0 18px 0;
+            font-weight: bold;
+        }
+        .top-bar {
+            text-align: left;
+            margin-bottom: 12px;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 10px;
+        }
+        .btn {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 12px;
+            margin: 2px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #000000;
+            cursor: pointer;
+        }
+        .btn-sm {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 6px 10px;
+            margin: 2px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            cursor: pointer;
+        }
+        .btn-selected {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .launcher-btn {
+            display: block;
+            width: 92%;
+            max-width: 488px;
+            margin: 13px auto;
+            padding: 20px 18px;
+            font-size: 25px;
+            font-weight: bold;
+            background-color: #ffffff;
+            color: #000000;
+            border: 5px solid #000000;
+            cursor: pointer;
+        }
+        .launcher-btn-installed {
+            display: block;
+            width: 92%;
+            max-width: 488px;
+            margin: 13px auto;
+            padding: 18px 18px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #ffffff;
+            color: #000000;
+            border: 4px dashed #000000;
+            cursor: pointer;
+        }
+        .section-divider {
+            width: 92%;
+            max-width: 488px;
+            margin: 18px auto 8px auto;
+            border-top: 3px solid #000000;
+            padding-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .version-footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+            background-color: #ffffff;
+            padding: 5px 0;
+        }
+
+        /* Launcher Categories & Auto-Fit Grid Styles */
+        .launcher-cat-bar {
+            width: 96%;
+            max-width: 500px;
+            margin: 4px auto 8px auto;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #000000;
+            text-align: center;
+        }
+        .launcher-cat-btn {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 12px;
+            margin: 2px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #000000;
+            cursor: pointer;
+        }
+        .launcher-cat-btn-active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        #launcher-items-grid {
+            width: 96%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        /* Store Categories with Icons */
+        .store-cat-bar {
+            width: 96%;
+            margin: 0 auto 8px auto;
+            text-align: center;
+        }
+        .store-cat-btn {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 6px 9px;
+            margin: 2px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #000000;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+        .store-cat-btn svg {
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .store-cat-btn-active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* App Store Styles */
+        .store-status {
+            width: 96%;
+            margin: 0 auto 10px auto;
+            padding: 8px;
+            border: 2px solid #000000;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .store-card {
+            width: 96%;
+            margin: 0 auto 10px auto;
+            padding: 10px;
+            border: 3px solid #000000;
+            text-align: left;
+            background-color: #ffffff;
+        }
+        .store-card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .store-card-desc {
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        #installed-app-container {
+            width: 98%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        /* Tic Tac Toe Styles */
+        #ttt-status {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0 18px 0;
+            min-height: 28px;
+        }
+        table.board {
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 5px solid #000000;
+        }
+        table.board td {
+            width: 105px;
+            height: 105px;
+            border: 4px solid #000000;
+            font-size: 60px;
+            font-weight: bold;
+            font-family: monospace;
+            text-align: center;
+            vertical-align: middle;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+        .score-box {
+            margin-top: 18px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        /* Lemonade Stand Styles */
+        .lem-box {
+            width: 98%;
+            margin: 0 auto 10px auto;
+            border: 3px solid #000000;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 16px;
+        }
+        table.lem-table {
+            width: 98%;
+            margin: 0 auto 10px auto;
+            border-collapse: collapse;
+            border: 3px solid #000000;
+            font-size: 15px;
+        }
+        table.lem-table th, table.lem-table td {
+            border: 2px solid #000000;
+            padding: 6px 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        table.lem-table th {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .lem-clock-bar {
+            width: 98%;
+            margin: 0 auto 10px auto;
+            border: 4px solid #000000;
+            padding: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #ffffff;
+        }
+        #lem-log {
+            width: 98%;
+            height: 155px;
+            margin: 0 auto 10px auto;
+            border: 3px solid #000000;
+            padding: 8px;
+            text-align: left;
+            overflow-y: auto;
+            font-size: 15px;
+            line-height: 1.35;
+        }
+        /* AI Chat Styles - Optimized for E-Ink Battery Saving */
+        #chat-log {
+            width: 96%;
+            height: 360px;
+            margin: 0 auto 12px auto;
+            border: 3px solid #000000;
+            padding: 12px;
+            text-align: left;
+            overflow-y: auto;
+            background-color: #ffffff;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .msg-row {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #000000;
+            word-wrap: break-word;
+        }
+        .msg-role {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-right: 6px;
+        }
+        .chat-input-table {
+            width: 96%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        #chat-input {
+            width: 100%;
+            font-size: 18px;
+            padding: 10px;
+            border: 3px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        #chat-input:disabled {
+            background-color: #eeeeee;
+            color: #555555;
+        }
+        .settings-panel {
+            width: 96%;
+            margin: 10px auto;
+            padding: 10px;
+            border: 2px solid #000000;
+            text-align: left;
+            font-size: 14px;
+        }
+        .settings-panel input {
+            width: 100%;
+            font-size: 14px;
+            padding: 6px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            border: 2px solid #000000;
+        }
+        /* Minimal Settings & Changelog Styles */
+        .clean-setting-row {
+            width: 96%;
+            max-width: 488px;
+            margin: 0 auto 12px auto;
+            padding: 12px;
+            border: 3px solid #000000;
+            text-align: left;
+            background-color: #ffffff;
+        }
+        .clean-setting-label {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .changelog-select {
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px;
+            border: 3px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .md-box {
+            border: 2px solid #000000;
+            padding: 10px 12px;
+            font-size: 15px;
+            line-height: 1.45;
+            background-color: #ffffff;
+        }
+        .md-box h2, .md-box h3 {
+            margin: 4px 0 8px 0;
+            font-size: 18px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 4px;
+        }
+        .md-box ul {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+        .md-box li {
+            margin-bottom: 5px;
+        }
+        .md-box code {
+            font-family: monospace;
+            font-weight: bold;
+        }
+        /* E-Ink Popup Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.92);
+            z-index: 9999;
+            padding: 30px 15px;
+            text-align: center;
+        }
+        .modal-box {
+            width: 94%;
+            max-width: 440px;
+            margin: 30px auto 0 auto;
+            background-color: #ffffff;
+            color: #000000;
+            border: 5px solid #000000;
+            padding: 18px 16px;
+            text-align: left;
+        }
+        .modal-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 6px;
+        }
+        .modal-body {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        .modal-actions {
+            text-align: right;
+        }
+    </style>
+    <style type="text/css" id="khub-zoom-style"></style>
+    <script type="text/javascript" src="kindle_state.js"></script>
+    <script type="text/javascript" src="apps/installed_apps.js"></script>
+    <script type="text/javascript">
+        function updateChrome(titleText) {
+            if (!window.kindle || !window.kindle.messaging) return;
+            var chromebar = {
+                "appId": "xyz.ethandupe.khub",
+                "topNavBar": {
+                    "template": "title",
+                    "title": titleText || "KHub Launcher",
+                    "buttons": [
+                        {
+                            "id": "KPP_MORE",
+                            "state": "enabled",
+                            "handling": "system"
+                        },
+                        {
+                            "id": "KPP_CLOSE",
+                            "state": "enabled",
+                            "handling": "system"
+                        }
+                    ]
+                },
+                "systemMenu": {
+                    "clientParams": {
+                        "profile": {
+                            "name": "default",
+                            "items": [
+                                {
+                                    "id": "KHUB_RELOAD",
+                                    "state": "enabled",
+                                    "handling": "notifyApp",
+                                    "label": "Reload App",
+                                    "position": 0
+                                }
+                            ],
+                            "selectionMode": "none",
+                            "closeOnUse": true
+                        }
+                    }
+                }
+            };
+            window.kindle.messaging.sendMessage("com.lab126.chromebar", "configureChrome", chromebar);
+        }
+
+        if (window.kindle && window.kindle.appmgr) {
+            window.kindle.appmgr.ongo = function (ctx) {
+                updateChrome("KHub Launcher");
+                window.kindle.messaging.receiveMessage("systemMenuItemSelected", function (type, id) {
+                    if (id === "KHUB_RELOAD") {
+                        window.location.reload();
+                    }
+                });
+            };
+        }
+    </script>
+</head>
+<body>
+
+    <!-- POPUP MODAL 1: AI KEY REQUIRED -->
+    <div id="ai-key-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-title">AI API Key Required</div>
+            <div id="ai-key-modal-msg" class="modal-body">
+                An AI API Key is required to open this app. Please add your key in Settings.
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-selected" onclick="goToSettingsFromPopup()">Go to Settings</button>
+                <button type="button" class="btn" onclick="closeAiKeyPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL 2: LAUNCHER GITHUB UPDATE AVAILABLE -->
+    <div id="update-popup-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-title" id="update-popup-title">Update Available!</div>
+            <div class="modal-body" id="update-popup-body">
+                A newer update is available on GitHub. Would you like to update everything now?
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-selected" id="update-popup-now-btn" onclick="performFullKhubUpdate()">Update Now</button>
+                <button type="button" class="btn" onclick="closeUpdatePopup()">Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Disk Bridge Iframe for Instant File:// API Key Delivery -->
+    <iframe id="khub-disk-iframe" src="api_key_bridge.html" style="display:none;width:0;height:0;border:0;"></iframe>
+
+    <!-- SCREEN 1: APP LAUNCHER (WITH TEXT CATEGORIES & AUTO-FIT LAYOUT) -->
+    <div id="launcher-screen">
+        <h1 id="launcher-title" style="font-size: 34px; margin: 4px 0 2px 0;">KHUB</h1>
+        <p id="launcher-subtitle" class="subtitle" style="font-size: 16px; margin: 0 0 6px 0;">Kindle App Launcher</p>
+
+        <!-- Launcher Category Tabs (No Icons, Classic KHub Style) -->
+        <div class="launcher-cat-bar">
+            <button type="button" id="lcat-all" class="launcher-cat-btn launcher-cat-btn-active" onclick="selectLauncherCategory('all')">All</button>
+            <button type="button" id="lcat-games" class="launcher-cat-btn" onclick="selectLauncherCategory('games')">Games</button>
+            <button type="button" id="lcat-productivity" class="launcher-cat-btn" onclick="selectLauncherCategory('productivity')">Productivity</button>
+            <button type="button" id="lcat-misc" class="launcher-cat-btn" onclick="selectLauncherCategory('misc')">Misc</button>
+        </div>
+
+        <!-- Auto-Fitting Launcher Buttons Container (Built-in + Downloaded Apps by Category) -->
+        <div id="launcher-items-grid"></div>
+
+        <!-- Legacy hidden placeholders so old references never error -->
+        <div id="launcher-installed-section" class="hidden"><div id="launcher-installed-list"></div></div>
+
+        <div class="version-footer">KHub v1.7</div>
+    </div>
+
+    <!-- SCREEN 8: CLEAN, UNCLUTTERED SETTINGS -->
+    <div id="settings-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="leaveSettingsScreen()">&larr; Home</button>
+            <strong style="font-size: 18px; margin-left: 6px;">Settings</strong>
+        </div>
+
+        <!-- 1. AI API KEY -->
+        <div class="clean-setting-row">
+            <div class="clean-setting-label">
+                AI API Key <small id="settings-key-badge" style="font-weight: normal;">(Not Set)</small>
+            </div>
+            <input type="text" id="global-api-key-input" placeholder="Paste Gemini API key..." autocomplete="off" style="width: 100%; font-size: 16px; padding: 8px; margin-bottom: 8px; border: 2px solid #000000; background: #ffffff; color: #000000;">
+            <div>
+                <button type="button" class="btn-sm btn-selected" onclick="saveGlobalApiKeyFromInput()">Save</button>
+                <button type="button" class="btn-sm" onclick="clearGlobalApiKey()">Clear</button>
+                <button type="button" class="btn-sm" id="remote-server-btn" onclick="toggleRemoteKeyServer()">Enter on Phone/PC</button>
+            </div>
+            <div id="remote-key-saved-banner" class="hidden" style="margin-top: 8px; padding: 8px; border: 2px solid #000000; font-size: 14px; font-weight: bold; background-color: #eeeeee;">
+                Key received &amp; saved! Web server stopped automatically.
+            </div>
+            <div id="remote-server-panel" class="hidden" style="margin-top: 10px; padding-top: 8px; border-top: 2px dashed #000000;">
+                <div style="font-size: 14px; margin-bottom: 4px;">Open this URL on your Phone/PC (same Wi-Fi):</div>
+                <div id="remote-server-url-box" style="border: 2px solid #000000; padding: 8px; font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 4px;">
+                    Detecting Kindle IP...
+                </div>
+                <div id="remote-server-status-msg" style="font-size: 13px; font-weight: bold;">
+                    Waiting for you to paste &amp; save key... (Auto-stops once received)
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. TEXT & LAUNCHER ZOOM -->
+        <div class="clean-setting-row">
+            <div class="clean-setting-label" style="margin-bottom: 8px;">
+                Text &amp; Launcher Size: <span id="zoom-level-label">100%</span>
+            </div>
+            <div>
+                <button type="button" class="btn-sm" onclick="adjustTextZoom(-10)">- Smaller</button>
+                <button type="button" class="btn-sm btn-selected" onclick="setTextZoom(100)">Reset (100%)</button>
+                <button type="button" class="btn-sm" onclick="adjustTextZoom(10)">+ Larger</button>
+            </div>
+        </div>
+
+        <!-- 3. UPDATES & ABOUT UPDATE (CHANGELOG) -->
+        <div class="clean-setting-row">
+            <div class="clean-setting-label">
+                KHub v1.7 &amp; Updates
+            </div>
+            <div id="settings-update-status" style="font-size: 14px; margin-bottom: 8px;">
+                Up to date.
+            </div>
+            <div>
+                <button type="button" class="btn-sm btn-selected" onclick="checkForKhubUpdates(true, false)">Check Updates</button>
+                <button type="button" class="btn-sm" onclick="openChangelogScreen()">About Update</button>
+                <button type="button" class="btn-sm btn-selected hidden" id="settings-update-now-btn" onclick="performFullKhubUpdate()">Update Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 9: ABOUT UPDATE / MARKDOWN CHANGELOG (ACCESSED FROM SETTINGS) -->
+    <div id="changelog-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openSettingsScreen()">&larr; Settings</button>
+            <strong style="font-size: 18px; margin-left: 6px;">About Updates</strong>
+        </div>
+
+        <div class="clean-setting-row">
+            <div class="clean-setting-label">KHub System Updates</div>
+            <select id="khub-changelog-select" class="changelog-select" onchange="renderSelectedKhubChangelog()"></select>
+            <div id="khub-changelog-md" class="md-box"></div>
+        </div>
+
+        <div class="clean-setting-row">
+            <div class="clean-setting-label">Kindle Store Updates</div>
+            <select id="store-changelog-select" class="changelog-select" onchange="renderSelectedStoreChangelog()"></select>
+            <div id="store-changelog-md" class="md-box"></div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: KHUB APP STORE (WITH ICON CATEGORIES & ZERO-SCROLL PAGINATION) -->
+    <div id="store-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openScreen('launcher-screen')">&larr; Home</button>
+            <strong style="font-size: 18px; margin-left: 6px;">KHub App Store</strong>
+            <button type="button" class="btn-sm" style="float: right;" onclick="fetchStoreCatalog()">Refresh</button>
+        </div>
+
+        <!-- App Store Category Bar WITH High-Contrast E-Ink Icons -->
+        <div class="store-cat-bar">
+            <button type="button" id="scat-all" class="store-cat-btn store-cat-btn-active" onclick="selectStoreCategory('all')">
+                <svg width="15" height="15" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="6" height="6" fill="currentColor"/><rect x="9" y="1" width="6" height="6" fill="currentColor"/><rect x="1" y="9" width="6" height="6" fill="currentColor"/><rect x="9" y="9" width="6" height="6" fill="currentColor"/></svg>All
+            </button>
+            <button type="button" id="scat-games" class="store-cat-btn" onclick="selectStoreCategory('games')">
+                <svg width="16" height="15" viewBox="0 0 18 16" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="16" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="5" y1="6" x2="5" y2="10" stroke="currentColor" stroke-width="2"/><line x1="3" y1="8" x2="7" y2="8" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="1.3" fill="currentColor"/><circle cx="14" cy="9" r="1.3" fill="currentColor"/></svg>Games
+            </button>
+            <button type="button" id="scat-productivity" class="store-cat-btn" onclick="selectStoreCategory('productivity')">
+                <svg width="15" height="15" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="14" fill="none" stroke="currentColor" stroke-width="2"/><line x1="5" y1="5" x2="11" y2="5" stroke="currentColor" stroke-width="2"/><line x1="5" y1="8" x2="11" y2="8" stroke="currentColor" stroke-width="2"/><line x1="5" y1="11" x2="9" y2="11" stroke="currentColor" stroke-width="2"/></svg>Productivity
+            </button>
+            <button type="button" id="scat-misc" class="store-cat-btn" onclick="selectStoreCategory('misc')">
+                <svg width="15" height="15" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><polygon points="8,1 10,6 15,8 10,10 8,15 6,10 1,8 6,6" fill="currentColor"/></svg>Misc
+            </button>
+        </div>
+
+        <div id="store-status-box" class="store-status">
+            Connecting to server...
+        </div>
+
+        <div id="store-catalog-list"></div>
+        <div id="store-pagination-bar" class="hidden" style="margin-top: 6px;">
+            <button type="button" class="btn-sm" id="store-prev-btn" onclick="changeStorePage(-1)">&larr; Prev</button>
+            <span id="store-page-label" style="font-size: 14px; font-weight: bold; margin: 0 8px;">Page 1 / 1</span>
+            <button type="button" class="btn-sm" id="store-next-btn" onclick="changeStorePage(1)">Next &rarr;</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: DOWNLOADED APP RUNNER -->
+    <div id="installed-app-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openScreen('launcher-screen')">&larr; Home</button>
+            <strong id="installed-app-title" style="font-size: 18px; margin-left: 8px;">Downloaded App</strong>
+        </div>
+        <div id="installed-app-notice" class="store-card hidden"></div>
+        <div id="installed-app-container"></div>
+    </div>
+
+    <!-- SCREEN 7: RSS NEWS FETCHER -->
+    <div id="rss-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openScreen('launcher-screen')">&larr; Home</button>
+            <strong style="font-size: 18px; margin-left: 6px;">RSS News</strong>
+            <button type="button" class="btn-sm" style="float: right;" onclick="loadRssStories(true)">Reload</button>
+            <button type="button" class="btn-sm" style="float: right;" onclick="toggleRssSettings()">Feeds</button>
+        </div>
+
+        <div id="rss-settings-panel" class="settings-panel hidden">
+            <strong>Add Custom News RSS:</strong>
+            <input type="text" id="rss-custom-input" placeholder="https://example.com/rss">
+            <button type="button" class="btn-sm btn-selected" onclick="addCustomRssFeed()">Add RSS</button>
+            <div style="margin-top: 10px; border-top: 2px solid #000000; padding-top: 8px;">
+                <strong>RSS Feeds:</strong>
+                <div id="rss-feeds-settings-list" style="margin-top: 6px;"></div>
+            </div>
+        </div>
+
+        <div id="rss-stories-container"></div>
+    </div>
+
+    <!-- SCREEN 4: TIC-TAC-TOE -->
+    <div id="ttt-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openScreen('launcher-screen')">&larr; Home</button>
+            <strong style="font-size: 20px; margin-left: 10px;">Tic-Tac-Toe</strong>
+        </div>
+
+        <div id="ttt-status">Player X's Turn</div>
+
+        <table class="board">
+            <tr>
+                <td id="c0" onclick="makeMove(0)"></td>
+                <td id="c1" onclick="makeMove(1)"></td>
+                <td id="c2" onclick="makeMove(2)"></td>
+            </tr>
+            <tr>
+                <td id="c3" onclick="makeMove(3)"></td>
+                <td id="c4" onclick="makeMove(4)"></td>
+                <td id="c5" onclick="makeMove(5)"></td>
+            </tr>
+            <tr>
+                <td id="c6" onclick="makeMove(6)"></td>
+                <td id="c7" onclick="makeMove(7)"></td>
+                <td id="c8" onclick="makeMove(8)"></td>
+            </tr>
+        </table>
+
+        <div class="score-box">
+            X Wins: <span id="score-x">0</span> &nbsp;|&nbsp;
+            Draws: <span id="score-d">0</span> &nbsp;|&nbsp;
+            O Wins: <span id="score-o">0</span>
+        </div>
+
+        <div class="controls">
+            <button type="button" class="btn" onclick="resetGame()">New Game</button>
+            <button type="button" class="btn" id="mode-btn" onclick="toggleMode()">Mode: vs AI</button>
+            <button type="button" class="btn" id="diff-btn" onclick="toggleDifficulty()">AI: Medium</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: LEMONADE STAND -->
+    <div id="lem-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="leaveLemonadeScreen()">&larr; Home</button>
+            <strong style="font-size: 18px; margin-left: 6px;">Lemonade Stand</strong>
+            <button type="button" class="btn-sm" style="float: right;" onclick="resetLemonadeGame()">Reset Business</button>
+        </div>
+
+        <div class="lem-box">
+            <div style="margin-bottom: 4px;">
+                <strong>Day <span id="lem-day">1</span></strong> &nbsp;|&nbsp;
+                <strong>Cash: $<span id="lem-money">20.00</span></strong> &nbsp;|&nbsp;
+                <strong>Total Profit: $<span id="lem-profit">0.00</span></strong>
+            </div>
+            <div>
+                <strong>Weather Forecast:</strong> <span id="lem-weather">Sunny &amp; Warm (78&deg;F) - Good Demand</span>
+            </div>
+        </div>
+
+        <div id="lem-prep-view">
+            <table class="lem-table">
+                <tr>
+                    <th>Supply Item</th>
+                    <th>In Stock</th>
+                    <th>Buy Bulk Supplies</th>
+                </tr>
+                <tr>
+                    <td><strong>Lemons</strong><br><small>1 per cup</small></td>
+                    <td><strong id="inv-lemons">0</strong></td>
+                    <td>
+                        <button type="button" class="btn-sm" onclick="buySupply('lemons', 10, 2.00)">+10 ($2)</button>
+                        <button type="button" class="btn-sm" onclick="buySupply('lemons', 30, 5.00)">+30 ($5)</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Sugar</strong><br><small>1 per cup</small></td>
+                    <td><strong id="inv-sugar">0</strong></td>
+                    <td>
+                        <button type="button" class="btn-sm" onclick="buySupply('sugar', 15, 2.00)">+15 ($2)</button>
+                        <button type="button" class="btn-sm" onclick="buySupply('sugar', 45, 5.00)">+45 ($5)</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Cups</strong><br><small>1 per cup</small></td>
+                    <td><strong id="inv-cups">0</strong></td>
+                    <td>
+                        <button type="button" class="btn-sm" onclick="buySupply('cups', 25, 1.50)">+25 ($1.50)</button>
+                        <button type="button" class="btn-sm" onclick="buySupply('cups', 75, 4.00)">+75 ($4)</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Ad Signs</strong><br><small>+15% traffic/sign (today)</small></td>
+                    <td><strong id="inv-signs">0</strong></td>
+                    <td>
+                        <button type="button" class="btn-sm" onclick="buySupply('signs', 1, 2.00)">+1 ($2)</button>
+                        <button type="button" class="btn-sm" onclick="buySupply('signs', 3, 5.00)">+3 ($5)</button>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="lem-box" style="text-align: center;">
+                <div style="margin-bottom: 8px;">
+                    <strong>Set Cup Price: $<span id="lem-price">1.00</span></strong>
+                    &nbsp;
+                    <button type="button" class="btn-sm" onclick="changePrice(-0.25)">- $0.25</button>
+                    <button type="button" class="btn-sm" onclick="changePrice(0.25)">+ $0.25</button>
+                </div>
+                <div style="font-size: 14px; margin-bottom: 10px;">
+                    Max Cups You Can Make Today: <strong id="lem-max-cups">0</strong> cups
+                </div>
+                <div id="lem-msg" style="font-weight: bold; margin-bottom: 8px; min-height: 18px;">Buy supplies &amp; set your price!</div>
+                <button type="button" class="btn btn-selected" style="width: 90%; font-size: 18px; padding: 12px;" onclick="startLemonadeDay()">Open Stand (8:00 AM - 5:00 PM)</button>
+            </div>
+        </div>
+
+        <div id="lem-run-view" class="hidden">
+            <div class="lem-clock-bar">
+                Time: <span id="lem-clock">8:00 AM</span>
+                <div style="font-size: 15px; margin-top: 6px; font-weight: normal;">
+                    Sold Today: <strong id="live-sold">0</strong> cups &nbsp;|&nbsp;
+                    Revenue: <strong>$<span id="live-rev">0.00</span></strong> &nbsp;|&nbsp;
+                    Cups Left: <strong id="live-left">0</strong>
+                </div>
+            </div>
+
+            <div class="lem-box" style="text-align: center;">
+                <strong>Live Price: $<span id="live-price">1.00</span></strong> &nbsp;
+                <button type="button" class="btn-sm" onclick="changePrice(-0.25)">- $0.25</button>
+                <button type="button" class="btn-sm" onclick="changePrice(0.25)">+ $0.25</button>
+                &nbsp;|&nbsp;
+                <button type="button" class="btn-sm" onclick="closeStandEarly()">Close Early</button>
+            </div>
+
+            <div id="lem-log"></div>
+
+            <div id="lem-end-controls" class="hidden" style="margin-top: 8px;">
+                <button type="button" class="btn btn-selected" style="width: 90%; font-size: 18px; padding: 12px;" onclick="nextLemonadeDay()">Continue to Next Day &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: KINDLE AI CHAT (NO IN-APP AI CONFIG OR SETTINGS BUTTONS) -->
+    <div id="chat-screen" class="hidden">
+        <div class="top-bar">
+            <button type="button" class="btn" onclick="openScreen('launcher-screen')">&larr; Home</button>
+            <strong style="font-size: 18px; margin-left: 6px;">AI Chat</strong>
+            <button type="button" class="btn-sm" style="float: right;" onclick="clearChat()">Clear</button>
+            <button type="button" class="btn-sm" style="float: right;" id="eco-btn" onclick="toggleEcoMode()">Eco: Fast</button>
+        </div>
+
+        <div id="chat-log">
+            <div class="msg-row">
+                <span class="msg-role">AI:</span>
+                <span>Ready! Type your message below.</span>
+            </div>
+        </div>
+
+        <form onsubmit="sendChatMessage(); return false;" style="margin: 0;">
+            <table class="chat-input-table">
+                <tr>
+                    <td style="padding-right: 6px;">
+                        <input type="text" id="chat-input" placeholder="Type message and press Enter..." autocomplete="off" onkeydown="handleKeyDown(event)">
+                    </td>
+                    <td style="width: 90px;">
+                        <button type="submit" class="btn" id="send-btn" style="width: 100%; margin: 0; padding: 10px 0;">Send</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        /* --- GLOBAL CONSTANTS & LOCKED AI MODEL (3.1 FLASH LITE ONLY) --- */
+        var KHUB_CURRENT_VERSION = "1.7";
+        var GITHUB_REPO_BASE = "https://ethandupe.github.io/KindleHub";
+        var STORE_REPO_URL = "https://ethandupe.github.io/KindleHub/kindlestore.json";
+        var GEMINI_31_LITE_MODEL = "gemini-3.1-flash-lite";
+        var GEMINI_31_LITE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent";
+        var LOCAL_HELPER_URL = "http://127.0.0.1:8088";
+
+        var globalApiKey = "";
+        var currentTextZoom = 100;
+        var remoteServerRunning = false;
+        var remoteServerPollTimer = null;
+        var lastKnownKindleIp = "";
+
+        /* --- MARKDOWN PARSER & CHANGELOG DATA (KHUB + KINDLE STORE) --- */
+        var khubChangelogList = [
+            {
+                version: "v1.7",
+                title: "v1.7 (Latest) — Instant Remote Key Receive, Auto-Stop & Categories",
+                markdown: "## KHub v1.7\n- **Instant Remote Key Sync & Auto-Stop**: Pasting your Gemini key on Phone/PC immediately populates the Kindle API Key input box, saves permanently, and automatically stops the web server.\n- **App Store Categories with Icons**: Filter the store by **Games**, **Productivity**, **Misc**, or **All** with E-Ink icons and zero-scroll pagination.\n- **Launcher Categories & Auto-Fit**: Main page organizes built-in and downloaded apps into `All`, `Games`, `Productivity`, and `Misc`, auto-fitting buttons onto one screen.\n- **Tic-Tac-Toe Medium Difficulty**: Cycle between **Easy**, **Medium**, and **Hard** AI modes."
+            },
+            {
+                version: "v1.5",
+                title: "v1.5 — Unified AI Key, Disk Apps & Clean Settings",
+                markdown: "## KHub v1.7\n- **Streamlined Settings**: Clean, minimal settings layout for your AI API Key, Text Size, and Updates.\n- **Unified AI Key (`gemini-3.1-flash-lite`)**: One single API key in Settings powers AI Chat, RSS News, and AI Store games with no extra config buttons inside apps.\n- **Phone/PC Key Setup**: Start a local web server on your Kindle with automatic Wi-Fi IP detection to paste your API key from another device.\n- **On-Device `/khub/apps/` Storage**: Store games download directly into `/khub/apps/<app-id>/` on your Kindle.\n- **About Updates (Markdown Changelog)**: Dropdown release notes for KHub and Kindle Store updates."
+            },
+            {
+                version: "v1.4",
+                title: "v1.4 — RSS News & Online App Store",
+                markdown: "## KHub v1.4\n- Added **RSS News** reader with hourly auto-refresh and custom RSS feed support.\n- Added **KHub Online App Store** with one-tap game installation.\n- Added low-power E-Ink optimizations across all screens."
+            },
+            {
+                version: "v1.3",
+                title: "v1.3 — Lemonade Stand & AI Chat",
+                markdown: "## KHub v1.3\n- Added **Lemonade Stand** business simulation game with live clock and weather forecasts.\n- Added **Kindle AI Chat** with Eco Fast mode.\n- Improved **Tic-Tac-Toe** hard AI minimax mode."
+            }
+        ];
+
+        var storeChangelogList = [
+            {
+                version: "Store v1.5",
+                title: "Store v1.5 (Latest) — Disk Downloads & Dynamic AI Quest",
+                markdown: "## Kindle Store v1.5\n- **On-Device Game Downloads**: Games download directly to `/khub/apps/<app-id>/` on your Kindle.\n- **AI Tap Adventure v1.4**: Generates a **brand-new unique opening story and choices** every single time you start a new game.\n- **Store Server Detector**: Automatically detects if your Kindle Wi-Fi is ON but the store server is down."
+            },
+            {
+                version: "Store v1.4",
+                title: "Store v1.4 — Initial Official Catalog",
+                markdown: "## Kindle Store v1.4\n- Released **AI Tap Adventure** (50-choice interactive story).\n- Released **2048 E-Ink** (4x4 high-contrast puzzle).\n- Released **Quick Notes** (saved E-Ink scratchpad)."
+            }
+        ];
+
+        function parseMarkdownToHtml(mdText) {
+            if (!mdText) return "";
+            var lines = String(mdText).replace(/\r\n/g, "\n").split("\n");
+            var html = "";
+            var inList = false;
+
+            function formatInline(str) {
+                var s = escapePlain(str);
+                s = s.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+                s = s.replace(/\*(.*?)\*/g, "<em>$1</em>");
+                s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+                return s;
+            }
+
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].replace(/^\s+|\s+$/g, "");
+                if (!line) {
+                    if (inList) {
+                        html += "</ul>";
+                        inList = false;
+                    }
+                    continue;
+                }
+                if (line.indexOf("### ") === 0) {
+                    if (inList) { html += "</ul>"; inList = false; }
+                    html += "<h3>" + formatInline(line.substring(4)) + "</h3>";
+                } else if (line.indexOf("## ") === 0) {
+                    if (inList) { html += "</ul>"; inList = false; }
+                    html += "<h2>" + formatInline(line.substring(3)) + "</h2>";
+                } else if (line.indexOf("# ") === 0) {
+                    if (inList) { html += "</ul>"; inList = false; }
+                    html += "<h2>" + formatInline(line.substring(2)) + "</h2>";
+                } else if (line.indexOf("- ") === 0 || line.indexOf("* ") === 0) {
+                    if (!inList) {
+                        html += "<ul>";
+                        inList = true;
+                    }
+                    html += "<li>" + formatInline(line.substring(2)) + "</li>";
+                } else {
+                    if (inList) { html += "</ul>"; inList = false; }
+                    html += "<p style='margin:6px 0;'>" + formatInline(line) + "</p>";
+                }
+            }
+            if (inList) html += "</ul>";
+            return html;
+        }
+
+        function openChangelogScreen() {
+            openScreen("changelog-screen");
+            populateChangelogDropdowns();
+        }
+
+        function populateChangelogDropdowns() {
+            var khubSel = document.getElementById("khub-changelog-select");
+            var storeSel = document.getElementById("store-changelog-select");
+            if (khubSel) {
+                var kHtml = "";
+                for (var i = 0; i < khubChangelogList.length; i++) {
+                    kHtml += '<option value="' + i + '">' + escapePlain(khubChangelogList[i].title) + '</option>';
+                }
+                khubSel.innerHTML = kHtml;
+                renderSelectedKhubChangelog();
+            }
+            if (storeSel) {
+                var sHtml = "";
+                for (var j = 0; j < storeChangelogList.length; j++) {
+                    sHtml += '<option value="' + j + '">' + escapePlain(storeChangelogList[j].title) + '</option>';
+                }
+                storeSel.innerHTML = sHtml;
+                renderSelectedStoreChangelog();
+            }
+        }
+
+        function renderSelectedKhubChangelog() {
+            var sel = document.getElementById("khub-changelog-select");
+            var box = document.getElementById("khub-changelog-md");
+            if (!sel || !box) return;
+            var idx = parseInt(sel.value, 10) || 0;
+            var item = khubChangelogList[idx] || khubChangelogList[0];
+            box.innerHTML = parseMarkdownToHtml(item ? item.markdown : "");
+        }
+
+        function renderSelectedStoreChangelog() {
+            var sel = document.getElementById("store-changelog-select");
+            var box = document.getElementById("store-changelog-md");
+            if (!sel || !box) return;
+            var idx = parseInt(sel.value, 10) || 0;
+            var item = storeChangelogList[idx] || storeChangelogList[0];
+            box.innerHTML = parseMarkdownToHtml(item ? item.markdown : "");
+        }
+
+        /* --- AUTOMATIC KINDLE IP DETECTION --- */
+        function isValidLanIp(ipStr) {
+            if (!ipStr) return false;
+            var s = String(ipStr).replace(/^\s+|\s+$/g, "");
+            if (!/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(s)) return false;
+            if (s === "127.0.0.1" || s === "0.0.0.0" || s.indexOf("169.254.") === 0) return false;
+            return true;
+        }
+
+        function setDetectedKindleIp(ipStr) {
+            if (!isValidLanIp(ipStr)) return;
+            lastKnownKindleIp = String(ipStr).replace(/^\s+|\s+$/g, "");
+            try {
+                if (window.localStorage) {
+                    window.localStorage.setItem("khub_last_kindle_ip", lastKnownKindleIp);
+                }
+            } catch (e) {}
+            var urlBox = document.getElementById("remote-server-url-box");
+            if (urlBox) {
+                urlBox.innerHTML = "http://" + escapePlain(lastKnownKindleIp) + ":8088";
+            }
+        }
+
+        var bridgeSeqCounter = 0;
+        var keyBaselineWhenServerStarted = "";
+
+        function applyReceivedRemoteApiKey(incomingKey, wasAutoStopped) {
+            var clean = String(incomingKey || "").replace(/^\s+|\s+$/g, "");
+            if (!clean) return;
+            var current = getGlobalApiKey();
+            var inp = document.getElementById("global-api-key-input");
+            /* Always ensure the input box visibly displays the key */
+            if (inp && inp.value !== clean) {
+                inp.value = clean;
+            }
+            if (clean !== current || (remoteServerRunning && clean !== keyBaselineWhenServerStarted) || (remoteServerRunning && wasAutoStopped)) {
+                setGlobalApiKey(clean, false);
+                if (inp) inp.value = clean;
+                var badge = document.getElementById("settings-key-badge");
+                if (badge) badge.innerHTML = "(Saved & Active!)";
+                if (remoteServerRunning) {
+                    stopRemoteKeyServer(true);
+                }
+            }
+        }
+
+        window.onKhubDiskState = function (stateObj) {
+            if (!stateObj) return;
+            if (stateObj.ip && isValidLanIp(stateObj.ip)) {
+                setDetectedKindleIp(stateObj.ip);
+            }
+            if (stateObj.apiKey) {
+                applyReceivedRemoteApiKey(stateObj.apiKey, !!stateObj.autoStopped || stateObj.remoteActive === false);
+            }
+            if (typeof stateObj.zoom === "number" && stateObj.zoom >= 70 && stateObj.zoom <= 160 && !window.localStorage.getItem("khub_text_zoom_v1")) {
+                setTextZoom(stateObj.zoom, false);
+            }
+        };
+
+        window.onKhubDiskApps = function (diskAppsMap) {
+            if (!diskAppsMap || typeof diskAppsMap !== "object") return;
+            var changed = false;
+            for (var k in diskAppsMap) {
+                if (diskAppsMap.hasOwnProperty(k) && diskAppsMap[k] && diskAppsMap[k].html) {
+                    installedApps[k] = diskAppsMap[k];
+                    upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(installedApps[k]);
+                    changed = true;
+                }
+            }
+            if (changed) {
+                saveInstalledApps();
+                renderLauncherInstalledApps();
+            }
+        };
+
+        function loadScriptBridge(srcUrl) {
+            try {
+                var head = document.getElementsByTagName("head")[0] || document.body;
+                bridgeSeqCounter = (bridgeSeqCounter + 1) % 6;
+                var scriptId = "khub-dyn-bridge-" + bridgeSeqCounter;
+                var old = document.getElementById(scriptId);
+                if (old && old.parentNode) {
+                    old.parentNode.removeChild(old);
+                }
+                var s = document.createElement("script");
+                s.type = "text/javascript";
+                s.id = scriptId;
+                /* Critical: only append ?_t= cache-buster to http:// or https:// URLs, NEVER to local file:// relative paths */
+                if (srcUrl.indexOf("http://") === 0 || srcUrl.indexOf("https://") === 0) {
+                    s.src = srcUrl + (srcUrl.indexOf("?") === -1 ? "?" : "&") + "_t=" + new Date().getTime();
+                } else {
+                    s.src = srcUrl;
+                }
+                head.appendChild(s);
+            } catch (e) {}
+        }
+
+        function detectKindleIpInBrowser() {
+            if (window.__khubDiskState && window.__khubDiskState.ip) {
+                setDetectedKindleIp(window.__khubDiskState.ip);
+            }
+            if (!lastKnownKindleIp) {
+                try {
+                    var cachedIp = window.localStorage && window.localStorage.getItem("khub_last_kindle_ip");
+                    if (cachedIp && isValidLanIp(cachedIp)) {
+                        setDetectedKindleIp(cachedIp);
+                    }
+                } catch (e) {}
+            }
+            try {
+                if (window.kindle && window.kindle.net) {
+                    if (typeof window.kindle.net.getIpAddress === "function") {
+                        var kip = window.kindle.net.getIpAddress();
+                        if (isValidLanIp(kip)) setDetectedKindleIp(kip);
+                    } else if (window.kindle.net.ipAddress && isValidLanIp(window.kindle.net.ipAddress)) {
+                        setDetectedKindleIp(window.kindle.net.ipAddress);
+                    }
+                }
+            } catch (e) {}
+            try {
+                var PeerConn = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+                if (PeerConn) {
+                    var pc = new PeerConn({ iceServers: [] });
+                    if (pc.createDataChannel) pc.createDataChannel("");
+                    pc.onicecandidate = function (ice) {
+                        if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+                        var m = ice.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
+                        if (m && m[1] && isValidLanIp(m[1])) {
+                            setDetectedKindleIp(m[1]);
+                        }
+                    };
+                    pc.createOffer(function (offer) {
+                        pc.setLocalDescription(offer, function () {}, function () {});
+                    }, function () {});
+                }
+            } catch (e) {}
+        }
+
+        /* --- PERMANENT API KEY & SETTINGS STORAGE --- */
+        function readCookie(name) {
+            try {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(";");
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === " ") c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+                }
+            } catch (e) {}
+            return "";
+        }
+
+        function writeCookie(name, value) {
+            try {
+                var d = new Date();
+                d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
+                document.cookie = name + "=" + encodeURIComponent(value || "") + "; expires=" + d.toUTCString() + "; path=/";
+            } catch (e) {}
+        }
+
+        function getGlobalApiKey() {
+            if (globalApiKey) return globalApiKey;
+            try {
+                if (window.localStorage) {
+                    var saved = window.localStorage.getItem("khub_global_api_key");
+                    if (saved) {
+                        globalApiKey = saved.replace(/^\s+|\s+$/g, "");
+                        if (globalApiKey) return globalApiKey;
+                    }
+                }
+            } catch (e) {}
+            var fromCookie = readCookie("khub_global_api_key").replace(/^\s+|\s+$/g, "");
+            if (fromCookie) {
+                globalApiKey = fromCookie;
+                return globalApiKey;
+            }
+            return "";
+        }
+
+        function hasGlobalApiKey() {
+            var k = getGlobalApiKey();
+            return !!(k && k.length > 0);
+        }
+
+        function setGlobalApiKey(newKey, syncToDisk) {
+            var clean = String(newKey || "").replace(/^\s+|\s+$/g, "");
+            globalApiKey = clean;
+            try {
+                if (window.localStorage) {
+                    if (clean) {
+                        window.localStorage.setItem("khub_global_api_key", clean);
+                    } else {
+                        window.localStorage.removeItem("khub_global_api_key");
+                    }
+                }
+            } catch (e) {}
+            writeCookie("khub_global_api_key", clean);
+
+            var inp = document.getElementById("global-api-key-input");
+            if (inp && inp.value !== clean) {
+                inp.value = clean;
+            }
+            updateSettingsKeyStatusUI();
+
+            if (syncToDisk !== false) {
+                var q = clean
+                    ? ("action=save&key=" + encodeURIComponent(clean))
+                    : "action=save&clear=1";
+                sendHelperCommand(q);
+            }
+        }
+
+        function saveGlobalApiKeyFromInput() {
+            var inp = document.getElementById("global-api-key-input");
+            var val = inp ? inp.value.replace(/^\s+|\s+$/g, "") : "";
+            setGlobalApiKey(val, true);
+            var badge = document.getElementById("settings-key-badge");
+            if (badge) {
+                badge.innerHTML = val ? "(Saved!)" : "(Cleared)";
+            }
+        }
+
+        function clearGlobalApiKey() {
+            var inp = document.getElementById("global-api-key-input");
+            if (inp) inp.value = "";
+            setGlobalApiKey("", true);
+        }
+
+        function updateSettingsKeyStatusUI() {
+            var badge = document.getElementById("settings-key-badge");
+            var inp = document.getElementById("global-api-key-input");
+            var k = getGlobalApiKey();
+            if (inp && k && inp.value !== k) {
+                inp.value = k;
+            }
+            if (!badge) return;
+            if (k) {
+                badge.innerHTML = "(Active)";
+            } else {
+                badge.innerHTML = "(Not Set)";
+            }
+        }
+
+        function readDiskApiKeyDirect() {
+            /* 1. Reload hidden file:// bridge iframe (bypasses query-string bug on file://) */
+            try {
+                var ifr = document.getElementById("khub-disk-iframe");
+                if (ifr && ifr.contentWindow && ifr.contentWindow.location) {
+                    ifr.contentWindow.location.reload(true);
+                }
+            } catch (e) {}
+
+            /* 2. XHR to local api_key.txt WITHOUT ?_t= query string so file:// finds it */
+            try {
+                var fXhr = new XMLHttpRequest();
+                fXhr.timeout = 1500;
+                fXhr.open("GET", "api_key.txt", true);
+                fXhr.onreadystatechange = function () {
+                    if (fXhr.readyState === 4 && (fXhr.status === 200 || fXhr.status === 0) && fXhr.responseText) {
+                        var diskKey = fXhr.responseText.replace(/^\s+|\s+$/g, "");
+                        if (diskKey && diskKey.length >= 10 && diskKey.indexOf("<") === -1) {
+                            applyReceivedRemoteApiKey(diskKey, false);
+                        }
+                    }
+                };
+                fXhr.send(null);
+            } catch (e) {}
+        }
+
+        function sendHelperCommand(queryStr) {
+            loadScriptBridge("http://127.0.0.1:8089/cgi-bin/khub.cgi?" + queryStr + "&jsonp=1");
+            loadScriptBridge("http://127.0.0.1:8088/cgi-bin/khub.cgi?" + queryStr + "&jsonp=1");
+            if (lastKnownKindleIp) {
+                loadScriptBridge("http://" + lastKnownKindleIp + ":8089/cgi-bin/khub.cgi?" + queryStr + "&jsonp=1");
+                loadScriptBridge("http://" + lastKnownKindleIp + ":8088/cgi-bin/khub.cgi?" + queryStr + "&jsonp=1");
+            }
+        }
+
+        function syncPermanentStorageOnBoot() {
+            getGlobalApiKey();
+            detectKindleIpInBrowser();
+            if (window.__khubDiskState) {
+                window.onKhubDiskState(window.__khubDiskState);
+            }
+            if (window.__khubDiskApps) {
+                window.onKhubDiskApps(window.__khubDiskApps);
+            }
+            readDiskApiKeyDirect();
+            pollLocalHelperServer(false);
+        }
+
+        /* --- REMOTE DEVICE WEB SERVER FOR PASTING API KEY --- */
+        function toggleRemoteKeyServer() {
+            if (remoteServerRunning) {
+                stopRemoteKeyServer(false);
+            } else {
+                startRemoteKeyServer();
+            }
+        }
+
+        function startRemoteKeyServer() {
+            remoteServerRunning = true;
+            keyBaselineWhenServerStarted = getGlobalApiKey();
+            var btn = document.getElementById("remote-server-btn");
+            var panel = document.getElementById("remote-server-panel");
+            var savedBanner = document.getElementById("remote-key-saved-banner");
+            if (savedBanner) savedBanner.className = "hidden";
+            if (btn) {
+                btn.innerHTML = "Stop Server";
+                btn.className = "btn-sm btn-selected";
+            }
+            if (panel) panel.className = "";
+
+            detectKindleIpInBrowser();
+            updateRemoteServerUrlBox();
+            sendHelperCommand("action=start");
+
+            if (remoteServerPollTimer) clearInterval(remoteServerPollTimer);
+            remoteServerPollTimer = setInterval(function () {
+                pollLocalHelperServer(true);
+            }, 1400);
+        }
+
+        function stopRemoteKeyServer(autoStoppedAfterSave) {
+            remoteServerRunning = false;
+            if (remoteServerPollTimer) {
+                clearInterval(remoteServerPollTimer);
+                remoteServerPollTimer = null;
+            }
+            var btn = document.getElementById("remote-server-btn");
+            var panel = document.getElementById("remote-server-panel");
+            var savedBanner = document.getElementById("remote-key-saved-banner");
+            if (btn) {
+                btn.innerHTML = "Enter on Phone/PC";
+                btn.className = "btn-sm";
+            }
+            if (panel) panel.className = "hidden";
+            if (savedBanner) {
+                savedBanner.className = autoStoppedAfterSave ? "" : "hidden";
+            }
+            sendHelperCommand("action=stop");
+        }
+
+        function updateRemoteServerUrlBox() {
+            var urlBox = document.getElementById("remote-server-url-box");
+            var statusMsg = document.getElementById("remote-server-status-msg");
+
+            if (lastKnownKindleIp) {
+                if (urlBox) urlBox.innerHTML = "http://" + escapePlain(lastKnownKindleIp) + ":8088";
+                if (statusMsg) statusMsg.innerHTML = "Paste your key at the URL above and tap Save. Server stops automatically once received.";
+            } else {
+                if (urlBox) urlBox.innerHTML = "Detecting Kindle IP...";
+                if (statusMsg) statusMsg.innerHTML = "Ensure Kindle Wi-Fi is connected.";
+            }
+        }
+
+        function pollLocalHelperServer(fromUserOrPoll) {
+            readDiskApiKeyDirect();
+            loadScriptBridge("kindle_state.js");
+            sendHelperCommand("action=status");
+
+            var urlsToTry = ["http://127.0.0.1:8089/cgi-bin/khub.cgi?action=status", "http://127.0.0.1:8088/cgi-bin/khub.cgi?action=status"];
+            if (lastKnownKindleIp) {
+                urlsToTry.unshift("http://" + lastKnownKindleIp + ":8088/cgi-bin/khub.cgi?action=status");
+                urlsToTry.unshift("http://" + lastKnownKindleIp + ":8089/cgi-bin/khub.cgi?action=status");
+            }
+            for (var i = 0; i < Math.min(2, urlsToTry.length); i++) {
+                (function (u) {
+                    try {
+                        var xhr = new XMLHttpRequest();
+                        xhr.timeout = 1800;
+                        xhr.open("GET", u + "&_t=" + new Date().getTime(), true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                                try {
+                                    var data = JSON.parse(xhr.responseText);
+                                    window.onKhubDiskState(data);
+                                } catch (e) {}
+                            }
+                        };
+                        xhr.send(null);
+                    } catch (e) {}
+                })(urlsToTry[i]);
+            }
+        }
+
+        /* --- AI KEY REQUIRED POPUP --- */
+        function showAiKeyRequiredPopup(appName) {
+            var modal = document.getElementById("ai-key-modal");
+            var msgEl = document.getElementById("ai-key-modal-msg");
+            if (msgEl) {
+                var label = appName ? ("<strong>" + escapePlain(appName) + "</strong>") : "this AI app";
+                msgEl.innerHTML = "An AI API Key is required to open " + label + ". Add your key in Settings to use AI features.";
+            }
+            if (modal) {
+                modal.className = "modal-overlay";
+            }
+        }
+
+        function closeAiKeyPopup() {
+            var modal = document.getElementById("ai-key-modal");
+            if (modal) {
+                modal.className = "modal-overlay hidden";
+            }
+        }
+
+        function goToSettingsFromPopup() {
+            closeAiKeyPopup();
+            openSettingsScreen();
+            var inp = document.getElementById("global-api-key-input");
+            if (inp) {
+                try { inp.focus(); } catch (e) {}
+            }
+        }
+
+        /* --- TEXT & LAUNCHER SIZE ADJUSTER (ZOOM) --- */
+        function scalePx(basePx, pct) {
+            return Math.max(10, Math.round((basePx * pct) / 100));
+        }
+
+        function applyTextZoomStyle(pct) {
+            var styleEl = document.getElementById("khub-zoom-style");
+            if (!styleEl) return;
+            var css = "";
+            if (pct !== 100) {
+                css =
+                    "h1 { font-size: " + scalePx(40, pct) + "px !important; }" +
+                    ".subtitle { font-size: " + scalePx(20, pct) + "px !important; }" +
+                    ".launcher-btn { font-size: " + scalePx(25, pct) + "px !important; padding: " + scalePx(20, pct) + "px " + scalePx(18, pct) + "px !important; max-width: " + scalePx(488, pct) + "px !important; }" +
+                    ".launcher-btn-installed { font-size: " + scalePx(24, pct) + "px !important; padding: " + scalePx(18, pct) + "px " + scalePx(18, pct) + "px !important; max-width: " + scalePx(488, pct) + "px !important; }" +
+                    ".section-divider { font-size: " + scalePx(18, pct) + "px !important; max-width: " + scalePx(488, pct) + "px !important; }" +
+                    ".version-footer { font-size: " + scalePx(18, pct) + "px !important; }" +
+                    ".btn { font-size: " + scalePx(16, pct) + "px !important; padding: " + scalePx(8, pct) + "px " + scalePx(12, pct) + "px !important; }" +
+                    ".btn-sm { font-size: " + scalePx(14, pct) + "px !important; padding: " + scalePx(6, pct) + "px " + scalePx(10, pct) + "px !important; }" +
+                    ".store-card-title, .clean-setting-label { font-size: " + scalePx(18, pct) + "px !important; }" +
+                    ".store-card-desc, .store-status, .settings-panel, .md-box { font-size: " + scalePx(14, pct) + "px !important; }" +
+                    "#chat-log, #chat-input, .score-box { font-size: " + scalePx(18, pct) + "px !important; }" +
+                    ".lem-box, table.lem-table, #lem-log { font-size: " + scalePx(16, pct) + "px !important; }";
+            }
+            if (styleEl.styleSheet) {
+                styleEl.styleSheet.cssText = css;
+            } else {
+                styleEl.innerHTML = css;
+            }
+
+            var lbl = document.getElementById("zoom-level-label");
+            if (lbl) lbl.innerHTML = pct + "%";
+        }
+
+        function setTextZoom(pct, saveRemote) {
+            var clamped = Math.max(70, Math.min(150, Math.round(pct)));
+            currentTextZoom = clamped;
+            applyTextZoomStyle(clamped);
+            try {
+                if (window.localStorage) {
+                    window.localStorage.setItem("khub_text_zoom_v1", String(clamped));
+                }
+            } catch (e) {}
+            writeCookie("khub_text_zoom_v1", String(clamped));
+
+            if (saveRemote !== false) {
+                sendHelperCommand("action=save&zoom=" + clamped);
+                try {
+                    var xhr = new XMLHttpRequest();
+                    xhr.timeout = 2000;
+                    xhr.open("GET", LOCAL_HELPER_URL + "/save?zoom=" + clamped + "&_t=" + new Date().getTime(), true);
+                    xhr.send(null);
+                } catch (e) {}
+            }
+        }
+
+        function adjustTextZoom(delta) {
+            setTextZoom(currentTextZoom + delta, true);
+        }
+
+        function loadTextZoom() {
+            var z = 100;
+            try {
+                if (window.localStorage) {
+                    var raw = window.localStorage.getItem("khub_text_zoom_v1");
+                    if (raw) z = parseInt(raw, 10) || 100;
+                }
+            } catch (e) {}
+            if (z === 100) {
+                var c = parseInt(readCookie("khub_text_zoom_v1"), 10);
+                if (c) z = c;
+            }
+            setTextZoom(z, false);
+        }
+
+        /* --- GITHUB UPDATE CHECKER & FULL UPDATER --- */
+        var hasCheckedGithubUpdateOnBoot = false;
+        var latestDetectedVersion = KHUB_CURRENT_VERSION;
+        var pendingStoreAppUpdatesCount = 0;
+
+        function compareVersions(vA, vB) {
+            var pA = String(vA || "0").replace(/^v/i, "").split(".");
+            var pB = String(vB || "0").replace(/^v/i, "").split(".");
+            var len = Math.max(pA.length, pB.length);
+            for (var i = 0; i < len; i++) {
+                var nA = parseInt(pA[i] || "0", 10) || 0;
+                var nB = parseInt(pB[i] || "0", 10) || 0;
+                if (nA > nB) return 1;
+                if (nA < nB) return -1;
+            }
+            return 0;
+        }
+
+        function checkForKhubUpdates(isManualFromSettings, showLauncherPopupIfFound) {
+            var statusEl = document.getElementById("settings-update-status");
+
+            if (typeof navigator !== "undefined" && navigator.onLine === false) {
+                if (isManualFromSettings && statusEl) {
+                    statusEl.innerHTML = "Offline: Turn ON Wi-Fi to check for updates.";
+                }
+                return;
+            }
+
+            if (isManualFromSettings && statusEl) {
+                statusEl.innerHTML = "Checking GitHub...";
+            }
+
+            fetchRemoteConfigVersion(GITHUB_REPO_BASE + "/khub/config.xml", function (ver1) {
+                if (ver1) {
+                    checkStoreJsonForUpdates(ver1, isManualFromSettings, showLauncherPopupIfFound);
+                } else {
+                    fetchRemoteConfigVersion(GITHUB_REPO_BASE + "/config.xml", function (ver2) {
+                        checkStoreJsonForUpdates(ver2 || KHUB_CURRENT_VERSION, isManualFromSettings, showLauncherPopupIfFound);
+                    });
+                }
+            });
+        }
+
+        function fetchRemoteConfigVersion(url, cb) {
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 8000;
+            xhr.open("GET", url + "?_t=" + new Date().getTime(), true);
+            xhr.ontimeout = function () { cb(null); };
+            xhr.onerror = function () { cb(null); };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        var m = xhr.responseText.match(/<widget[^>]*version=["']([^"']+)["']/i);
+                        if (m && m[1]) {
+                            cb(m[1]);
+                            return;
+                        }
+                    }
+                    cb(null);
+                }
+            };
+            try {
+                xhr.send(null);
+            } catch (e) {
+                cb(null);
+            }
+        }
+
+        function checkStoreJsonForUpdates(configVer, isManualFromSettings, showLauncherPopupIfFound) {
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 10000;
+            xhr.open("GET", STORE_REPO_URL + "?_t=" + new Date().getTime(), true);
+            xhr.ontimeout = function () {
+                finalizeUpdateCheckResult(configVer, 0, isManualFromSettings, showLauncherPopupIfFound);
+            };
+            xhr.onerror = function () {
+                finalizeUpdateCheckResult(configVer, 0, isManualFromSettings, showLauncherPopupIfFound);
+            };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var bestVer = configVer || KHUB_CURRENT_VERSION;
+                    var outdatedApps = 0;
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            var storeKhubVer = data.khubVersion || data.version || data.latestVersion;
+                            if (storeKhubVer && compareVersions(storeKhubVer, bestVer) > 0) {
+                                bestVer = storeKhubVer;
+                            }
+                            if (data.storeChangelog && data.storeChangelog.length > 0) {
+                                storeChangelogList = data.storeChangelog;
+                            }
+                            if (data.khubChangelog && data.khubChangelog.length > 0) {
+                                khubChangelogList = data.khubChangelog;
+                            }
+                            var appsArr = data.apps || (data instanceof Array ? data : []);
+                            for (var i = 0; i < appsArr.length; i++) {
+                                appsArr[i].author = normalizeAuthorName(appsArr[i].author);
+                                var rApp = appsArr[i];
+                                if (installedApps[rApp.id]) {
+                                    if (compareVersions(rApp.version || "1.0", installedApps[rApp.id].version || "1.0") > 0) {
+                                        outdatedApps++;
+                                    }
+                                }
+                            }
+                            remoteCatalog = appsArr;
+                        } catch (e) {}
+                    }
+                    finalizeUpdateCheckResult(bestVer, outdatedApps, isManualFromSettings, showLauncherPopupIfFound);
+                }
+            };
+            try {
+                xhr.send(null);
+            } catch (e) {
+                finalizeUpdateCheckResult(configVer, 0, isManualFromSettings, showLauncherPopupIfFound);
+            }
+        }
+
+        function finalizeUpdateCheckResult(remoteVer, outdatedAppsCount, isManualFromSettings, showLauncherPopupIfFound) {
+            latestDetectedVersion = remoteVer || KHUB_CURRENT_VERSION;
+            pendingStoreAppUpdatesCount = outdatedAppsCount || 0;
+
+            var hasCoreUpdate = compareVersions(latestDetectedVersion, KHUB_CURRENT_VERSION) > 0;
+            var hasAnyUpdate = hasCoreUpdate || (pendingStoreAppUpdatesCount > 0);
+
+            var statusEl = document.getElementById("settings-update-status");
+            var updateNowBtn = document.getElementById("settings-update-now-btn");
+
+            if (statusEl) {
+                if (hasCoreUpdate) {
+                    statusEl.innerHTML = "Update available: KHub v" + escapePlain(latestDetectedVersion);
+                } else if (pendingStoreAppUpdatesCount > 0) {
+                    statusEl.innerHTML = pendingStoreAppUpdatesCount + " app update(s) available.";
+                } else {
+                    statusEl.innerHTML = "Up to date (v" + escapePlain(KHUB_CURRENT_VERSION) + ").";
+                }
+            }
+
+            if (updateNowBtn) {
+                updateNowBtn.className = hasAnyUpdate ? "btn-sm btn-selected" : "btn-sm btn-selected hidden";
+            }
+
+            if (hasAnyUpdate && showLauncherPopupIfFound) {
+                var modal = document.getElementById("update-popup-modal");
+                var titleEl = document.getElementById("update-popup-title");
+                var bodyEl = document.getElementById("update-popup-body");
+                if (titleEl) {
+                    titleEl.innerHTML = hasCoreUpdate
+                        ? ("Update Available (v" + escapePlain(latestDetectedVersion) + ")")
+                        : "App Updates Available!";
+                }
+                if (bodyEl) {
+                    bodyEl.innerHTML = hasCoreUpdate
+                        ? ("KHub v" + escapePlain(latestDetectedVersion) + " is available on GitHub. Tap Update Now to update everything.")
+                        : (pendingStoreAppUpdatesCount + " installed app(s) have updates on GitHub. Tap Update Now to update everything.");
+                }
+                if (modal) {
+                    modal.className = "modal-overlay";
+                }
+            }
+        }
+
+        function closeUpdatePopup() {
+            var modal = document.getElementById("update-popup-modal");
+            if (modal) modal.className = "modal-overlay hidden";
+        }
+
+        function performFullKhubUpdate() {
+            var statusEl = document.getElementById("settings-update-status");
+            var popupBody = document.getElementById("update-popup-body");
+            var popupBtn = document.getElementById("update-popup-now-btn");
+            if (statusEl) statusEl.innerHTML = "Updating...";
+            if (popupBody) popupBody.innerHTML = "Downloading and applying updates...";
+            if (popupBtn) popupBtn.disabled = true;
+
+            var finishStoreAppsUpdate = function () {
+                if (remoteCatalog && remoteCatalog.length > 0) {
+                    for (var i = 0; i < remoteCatalog.length; i++) {
+                        var item = remoteCatalog[i];
+                        if (installedApps[item.id] && item.html) {
+                            var updatedRec = {
+                                id: item.id,
+                                name: item.name || item.id,
+                                version: item.version || "1.0",
+                                author: normalizeAuthorName(item.author),
+                                category: getAppCategory(item),
+                    requiresAi: isAppAiPowered(item),
+                                description: item.description || "",
+                                diskPath: "/khub/apps/" + item.id + "/index.html",
+                                html: item.html
+                            };
+                            upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(updatedRec);
+                            installedApps[item.id] = updatedRec;
+                            persistAppToDiskFolder(updatedRec);
+                        }
+                    }
+                    saveInstalledApps();
+                    renderLauncherInstalledApps();
+                }
+
+                sendHelperCommand("action=update");
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 12000;
+                xhr.open("GET", "http://127.0.0.1:8089/cgi-bin/khub.cgi?action=update&_t=" + new Date().getTime(), true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (popupBtn) popupBtn.disabled = false;
+                        closeUpdatePopup();
+                        if (statusEl) statusEl.innerHTML = "Updated! Reloading...";
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 900);
+                    }
+                };
+                try {
+                    xhr.send(null);
+                } catch (e) {
+                    if (popupBtn) popupBtn.disabled = false;
+                    closeUpdatePopup();
+                    if (statusEl) statusEl.innerHTML = "Updated!";
+                }
+            };
+
+            if (!remoteCatalog || remoteCatalog.length === 0) {
+                var sXhr = new XMLHttpRequest();
+                sXhr.timeout = 8000;
+                sXhr.open("GET", STORE_REPO_URL + "?_t=" + new Date().getTime(), true);
+                sXhr.onreadystatechange = function () {
+                    if (sXhr.readyState === 4) {
+                        if (sXhr.status >= 200 && sXhr.status < 300 && sXhr.responseText) {
+                            try {
+                                var d = JSON.parse(sXhr.responseText);
+                                remoteCatalog = d.apps || [];
+                            } catch (e) {}
+                        }
+                        finishStoreAppsUpdate();
+                    }
+                };
+                try { sXhr.send(null); } catch (e) { finishStoreAppsUpdate(); }
+            } else {
+                finishStoreAppsUpdate();
+            }
+        }
+
+        /* --- NAVIGATION --- */
+        function openScreen(screenId) {
+            document.getElementById("launcher-screen").className = "hidden";
+            document.getElementById("settings-screen").className = "hidden";
+            document.getElementById("changelog-screen").className = "hidden";
+            document.getElementById("store-screen").className = "hidden";
+            document.getElementById("installed-app-screen").className = "hidden";
+            document.getElementById("rss-screen").className = "hidden";
+            document.getElementById("ttt-screen").className = "hidden";
+            document.getElementById("lem-screen").className = "hidden";
+            document.getElementById("chat-screen").className = "hidden";
+            document.getElementById(screenId).className = "";
+            if (screenId === "launcher-screen") {
+                renderLauncherInstalledApps();
+            } else if (screenId === "lem-screen") {
+                updateLemonadeUI();
+            }
+        }
+
+        function openSettingsScreen() {
+            openScreen("settings-screen");
+            var inp = document.getElementById("global-api-key-input");
+            if (inp) inp.value = getGlobalApiKey();
+            updateSettingsKeyStatusUI();
+            detectKindleIpInBrowser();
+            updateRemoteServerUrlBox();
+            pollLocalHelperServer(false);
+        }
+
+        function leaveSettingsScreen() {
+            if (remoteServerRunning) {
+                stopRemoteKeyServer();
+            }
+            openScreen("launcher-screen");
+        }
+
+        function openChatScreen() {
+            if (!hasGlobalApiKey()) {
+                showAiKeyRequiredPopup("Kindle AI Chat");
+                return;
+            }
+            openScreen("chat-screen");
+        }
+
+        /* --- KHUB APP STORE, SERVER ERROR DETECTOR & /khub/apps/<app-id>/ DISK INSTALLER --- */
+        var installedApps = {};
+        var remoteCatalog = [];
+        var hasCheckedStoreOnce = false;
+        var currentLaunchedAppId = null;
+        var ignoredRemovedApps = {};
+        var ignoredUpdateApps = {};
+
+        function normalizeAuthorName(authorStr) {
+            if (!authorStr || String(authorStr).toLowerCase() === "eko") {
+                return "EthanDupe";
+            }
+            return String(authorStr);
+        }
+
+        function isAppAiPowered(appObj) {
+            if (!appObj) return false;
+            if (appObj.requiresAi === true) return true;
+            if (appObj.id === "khub-adventure") return true;
+            var h = String(appObj.html || "");
+            var d = String(appObj.description || "");
+            if (h.indexOf("generativelanguage.googleapis.com") !== -1 ||
+                h.indexOf("KADV_URL") !== -1 ||
+                h.indexOf("getGlobalApiKey") !== -1 ||
+                /\b(gemini|ai\s+quest|ai\s+tap)\b/i.test(d)) {
+                return true;
+            }
+            return false;
+        }
+
+        function upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appObj) {
+            if (!appObj || !appObj.html) return;
+            var html = String(appObj.html);
+            html = html.replace(/gemini-3\.5-flash-lite/g, "gemini-3.1-flash-lite");
+            html = html.replace(/var\s+KADV_KEY\s*=\s*['"][^'"]*['"]\s*;/g, "var KADV_KEY = (window.getGlobalApiKey ? window.getGlobalApiKey() : '');");
+            html = html.replace(/encodeURIComponent\(KADV_KEY\)/g, "encodeURIComponent(window.getGlobalApiKey ? window.getGlobalApiKey() : KADV_KEY)");
+            /* Remove any legacy in-app AI Key Settings button from cached apps */
+            html = html.replace(/<button[^>]*onclick=['"][^'"]*openSettingsScreen[^'"]*['"][^>]*>[\s\S]*?<\/button>/gi, "");
+            appObj.html = html;
+            appObj.requiresAi = isAppAiPowered(appObj);
+            if (!appObj.diskPath && appObj.id) {
+                appObj.diskPath = "/khub/apps/" + appObj.id + "/index.html";
+            }
+        }
+
+        function persistAppToDiskFolder(appRecord) {
+            if (!appRecord || !appRecord.id) return;
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 5000;
+                xhr.open("POST", LOCAL_HELPER_URL + "/apps/install", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(appRecord));
+            } catch (e) {}
+        }
+
+        function removeAppFromDiskFolder(appId) {
+            if (!appId) return;
+            sendHelperCommand("action=uninstall&id=" + encodeURIComponent(appId));
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 3000;
+                xhr.open("GET", LOCAL_HELPER_URL + "/apps/uninstall?id=" + encodeURIComponent(appId) + "&_t=" + new Date().getTime(), true);
+                xhr.send(null);
+            } catch (e) {}
+        }
+
+        function loadInstalledApps() {
+            try {
+                if (window.localStorage) {
+                    var raw = window.localStorage.getItem("khub_installed_apps_v1");
+                    if (raw) {
+                        installedApps = JSON.parse(raw) || {};
+                    }
+                }
+            } catch (e) {
+                installedApps = {};
+            }
+            if (window.__khubDiskApps && typeof window.__khubDiskApps === "object") {
+                for (var dk in window.__khubDiskApps) {
+                    if (window.__khubDiskApps.hasOwnProperty(dk) && window.__khubDiskApps[dk]) {
+                        installedApps[dk] = window.__khubDiskApps[dk];
+                    }
+                }
+            }
+            for (var k in installedApps) {
+                if (installedApps.hasOwnProperty(k) && installedApps[k]) {
+                    installedApps[k].author = normalizeAuthorName(installedApps[k].author);
+                    upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(installedApps[k]);
+                }
+            }
+        }
+
+        function saveInstalledApps() {
+            try {
+                if (window.localStorage) {
+                    window.localStorage.setItem("khub_installed_apps_v1", JSON.stringify(installedApps));
+                }
+            } catch (e) {}
+        }
+
+        var currentLauncherCategory = "all";
+        var currentStoreCategory = "all";
+        var currentStorePage = 0;
+        var STORE_ITEMS_PER_PAGE = 3;
+
+        function getAppCategory(appObj) {
+            if (!appObj) return "misc";
+            var c = String(appObj.category || "").toLowerCase();
+            if (c === "games" || c === "productivity" || c === "misc") return c;
+            var id = String(appObj.id || "").toLowerCase();
+            var name = String(appObj.name || "").toLowerCase();
+            var desc = String(appObj.description || "").toLowerCase();
+            if (id.indexOf("2048") !== -1 || id.indexOf("adventure") !== -1 || id.indexOf("wordle") !== -1 || id.indexOf("sudoku") !== -1 ||
+                name.indexOf("game") !== -1 || name.indexOf("puzzle") !== -1 || desc.indexOf("game") !== -1 || desc.indexOf("puzzle") !== -1) {
+                return "games";
+            }
+            if (id.indexOf("note") !== -1 || id.indexOf("flashcard") !== -1 || name.indexOf("note") !== -1 ||
+                name.indexOf("study") !== -1 || desc.indexOf("scratchpad") !== -1 || desc.indexOf("study") !== -1) {
+                return "productivity";
+            }
+            return "misc";
+        }
+
+        function selectLauncherCategory(cat) {
+            currentLauncherCategory = cat || "all";
+            var cats = ["all", "games", "productivity", "misc"];
+            for (var i = 0; i < cats.length; i++) {
+                var btn = document.getElementById("lcat-" + cats[i]);
+                if (btn) {
+                    btn.className = (cats[i] === currentLauncherCategory)
+                        ? "launcher-cat-btn launcher-cat-btn-active"
+                        : "launcher-cat-btn";
+                }
+            }
+            renderLauncherInstalledApps();
+        }
+
+        function renderLauncherInstalledApps() {
+            var gridEl = document.getElementById("launcher-items-grid");
+            if (!gridEl) return;
+            gridEl.innerHTML = "";
+
+            /* Built-in apps organized by category */
+            var builtInItems = [
+                { title: "KHub App Store", category: "misc", primary: true, action: function () { openStoreScreen(); } },
+                { title: "Play Tic-Tac-Toe", category: "games", primary: false, action: function () { openScreen("ttt-screen"); } },
+                { title: "Lemonade Stand", category: "games", primary: false, action: function () { openScreen("lem-screen"); } },
+                { title: "Kindle AI Chat", category: "productivity", primary: false, action: function () { openChatScreen(); } },
+                { title: "RSS News", category: "productivity", primary: false, action: function () { openRssScreen(); } },
+                { title: "Settings", category: "misc", primary: false, action: function () { openSettingsScreen(); } }
+            ];
+
+            var itemsToRender = [];
+            for (var i = 0; i < builtInItems.length; i++) {
+                if (currentLauncherCategory === "all" || builtInItems[i].category === currentLauncherCategory) {
+                    itemsToRender.push({
+                        title: builtInItems[i].title,
+                        installed: false,
+                        primary: builtInItems[i].primary,
+                        action: builtInItems[i].action
+                    });
+                }
+            }
+
+            /* Downloaded apps placed right inside their respective categories */
+            for (var k in installedApps) {
+                if (installedApps.hasOwnProperty(k) && installedApps[k]) {
+                    (function (appId, appObj) {
+                        var appCat = getAppCategory(appObj);
+                        if (currentLauncherCategory === "all" || appCat === currentLauncherCategory) {
+                            itemsToRender.push({
+                                title: appObj.name || appId,
+                                installed: true,
+                                primary: false,
+                                action: function () { launchDownloadedApp(appId); }
+                            });
+                        }
+                    })(k, installedApps[k]);
+                }
+            }
+
+            var total = itemsToRender.length;
+            var titleEl = document.getElementById("launcher-title");
+            var subEl = document.getElementById("launcher-subtitle");
+
+            /* Auto-fit scaling: compact header & 2-column grid when many items are displayed */
+            var useTwoCols = (total >= 7);
+            if (titleEl && subEl) {
+                if (total >= 9) {
+                    titleEl.style.fontSize = "26px";
+                    titleEl.style.margin = "2px 0 0 0";
+                    subEl.style.display = "none";
+                } else if (total >= 6) {
+                    titleEl.style.fontSize = "30px";
+                    titleEl.style.margin = "3px 0 2px 0";
+                    subEl.style.display = "block";
+                    subEl.style.fontSize = "14px";
+                    subEl.style.margin = "0 0 4px 0";
+                } else {
+                    titleEl.style.fontSize = "34px";
+                    titleEl.style.margin = "4px 0 2px 0";
+                    subEl.style.display = "block";
+                    subEl.style.fontSize = "16px";
+                    subEl.style.margin = "0 0 6px 0";
+                }
+            }
+
+            for (var j = 0; j < total; j++) {
+                (function (item) {
+                    var btn = document.createElement("button");
+                    btn.type = "button";
+                    if (item.primary) {
+                        btn.className = "launcher-btn btn-selected";
+                    } else if (item.installed) {
+                        btn.className = "launcher-btn-installed";
+                    } else {
+                        btn.className = "launcher-btn";
+                    }
+
+                    /* Dynamic auto-fit sizing so buttons never overflow the screen */
+                    if (useTwoCols) {
+                        btn.style.display = "inline-block";
+                        btn.style.width = "47%";
+                        btn.style.maxWidth = "240px";
+                        btn.style.verticalAlign = "top";
+                        if (total >= 11) {
+                            btn.style.margin = "3px 1%";
+                            btn.style.padding = "9px 6px";
+                            btn.style.fontSize = "15px";
+                            btn.style.borderWidth = "3px";
+                        } else {
+                            btn.style.margin = "4px 1%";
+                            btn.style.padding = "12px 6px";
+                            btn.style.fontSize = "17px";
+                            btn.style.borderWidth = "4px";
+                        }
+                    } else if (total >= 5) {
+                        btn.style.display = "block";
+                        btn.style.width = "92%";
+                        btn.style.margin = "6px auto";
+                        btn.style.padding = "11px 14px";
+                        btn.style.fontSize = "19px";
+                        btn.style.borderWidth = "4px";
+                    } else {
+                        btn.style.display = "block";
+                        btn.style.width = "92%";
+                        btn.style.margin = "10px auto";
+                        btn.style.padding = "15px 16px";
+                        btn.style.fontSize = "22px";
+                    }
+
+                    btn.innerHTML = escapePlain(item.title);
+                    btn.onclick = item.action;
+                    gridEl.appendChild(btn);
+                })(itemsToRender[j]);
+            }
+        }
+
+        function escapePlain(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function openStoreScreen() {
+            openScreen("store-screen");
+            fetchStoreCatalog();
+        }
+
+        /* Detects whether Wi-Fi is ON when the Kindle Store fails, showing a Server Error if connected */
+        function tryLocalFallbackStoreCatalog(httpStatus) {
+            try {
+                var lXhr = new XMLHttpRequest();
+                lXhr.timeout = 2000;
+                lXhr.open("GET", "kindlestore.json", true);
+                lXhr.onreadystatechange = function () {
+                    if (lXhr.readyState === 4) {
+                        if ((lXhr.status === 200 || lXhr.status === 0) && lXhr.responseText) {
+                            try {
+                                var data = JSON.parse(lXhr.responseText);
+                                var appsArr = data.apps || [];
+                                if (appsArr.length > 0) {
+                                    for (var i = 0; i < appsArr.length; i++) {
+                                        appsArr[i].author = normalizeAuthorName(appsArr[i].author);
+                                        upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appsArr[i]);
+                                    }
+                                    remoteCatalog = appsArr;
+                                    document.getElementById("store-status-box").innerHTML = "KHub Store (Cached Catalog) — " + appsArr.length + " apps";
+                                    renderStoreCatalog();
+                                    return;
+                                }
+                            } catch (e) {}
+                        }
+                        diagnoseStoreFailure(httpStatus);
+                    }
+                };
+                lXhr.send(null);
+            } catch (e) {
+                diagnoseStoreFailure(httpStatus);
+            }
+        }
+
+        function diagnoseStoreFailure(httpStatus) {
+            var statusBox = document.getElementById("store-status-box");
+            var listEl = document.getElementById("store-catalog-list");
+
+            if (typeof navigator !== "undefined" && navigator.onLine === false) {
+                statusBox.innerHTML = "Offline: Kindle Wi-Fi connection is turned OFF.";
+                listEl.innerHTML = '<div class="store-card"><div class="store-card-title">No Wi-Fi Connection</div><div class="store-card-desc">Turn on your Kindle Wi-Fi to browse and download games from the KHub App Store.</div></div>';
+                return;
+            }
+
+            if (httpStatus && httpStatus > 0) {
+                statusBox.innerHTML = "Server Error (HTTP " + httpStatus + "): Connection is ON, but something is wrong with the KHub Store server.";
+                listEl.innerHTML = '<div class="store-card"><div class="store-card-title">Store Server Issue</div><div class="store-card-desc">Your Kindle is connected to Wi-Fi, but something is wrong with the KHub Store server (HTTP ' + httpStatus + '). Please try again later.</div></div>';
+                return;
+            }
+
+            /* Ping an external endpoint to verify if internet connection is active while store server is down */
+            var pingXhr = new XMLHttpRequest();
+            pingXhr.timeout = 5000;
+            pingXhr.open("GET", "https://api.github.com/?_t=" + new Date().getTime(), true);
+            pingXhr.onreadystatechange = function () {
+                if (pingXhr.readyState === 4) {
+                    if ((pingXhr.status >= 200 && pingXhr.status < 500) || lastKnownKindleIp) {
+                        statusBox.innerHTML = "Server Error: Connection is ON, but something is wrong with the KHub Store server.";
+                        listEl.innerHTML = '<div class="store-card"><div class="store-card-title">Something Is Wrong With the Server</div><div class="store-card-desc">Your Kindle Wi-Fi connection is ON, but the KHub Store server is offline or unreachable right now.</div></div>';
+                    } else {
+                        statusBox.innerHTML = "Offline: Ensure Kindle Wi-Fi is turned ON.";
+                    }
+                }
+            };
+            try {
+                pingXhr.send(null);
+            } catch (e) {
+                statusBox.innerHTML = "Server Error: Connection is ON, but something is wrong with the KHub Store server.";
+            }
+        }
+
+        function fetchStoreCatalog() {
+            var storeUrl = STORE_REPO_URL;
+            var statusBox = document.getElementById("store-status-box");
+            var listEl = document.getElementById("store-catalog-list");
+
+            statusBox.innerHTML = "Connecting to KHub Store...";
+            listEl.innerHTML = "";
+
+            if (typeof navigator !== "undefined" && navigator.onLine === false) {
+                diagnoseStoreFailure(0);
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 12000;
+            var fetchUrl = storeUrl + (storeUrl.indexOf("?") === -1 ? "?" : "&") + "_t=" + new Date().getTime();
+            xhr.open("GET", fetchUrl, true);
+
+            xhr.ontimeout = function () {
+                tryLocalFallbackStoreCatalog(0);
+            };
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            var appsArr = data.apps || (data instanceof Array ? data : []);
+                            if (data.storeChangelog && data.storeChangelog.length > 0) {
+                                storeChangelogList = data.storeChangelog;
+                            }
+                            for (var i = 0; i < appsArr.length; i++) {
+                                appsArr[i].author = normalizeAuthorName(appsArr[i].author);
+                                upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appsArr[i]);
+                            }
+                            remoteCatalog = appsArr;
+                            var storeTitle = data.storeName || "KHub Store";
+                            statusBox.innerHTML = escapePlain(storeTitle) + " — " + appsArr.length + " app(s) available.";
+                            renderStoreCatalog();
+                        } catch (e) {
+                            diagnoseStoreFailure(500);
+                        }
+                    } else {
+                        tryLocalFallbackStoreCatalog(xhr.status || 0);
+                    }
+                }
+            };
+
+            try {
+                xhr.send(null);
+            } catch (e) {
+                diagnoseStoreFailure(0);
+            }
+        }
+
+        function selectStoreCategory(cat) {
+            currentStoreCategory = cat || "all";
+            currentStorePage = 0;
+            var cats = ["all", "games", "productivity", "misc"];
+            for (var i = 0; i < cats.length; i++) {
+                var btn = document.getElementById("scat-" + cats[i]);
+                if (btn) {
+                    btn.className = (cats[i] === currentStoreCategory)
+                        ? "store-cat-btn store-cat-btn-active"
+                        : "store-cat-btn";
+                }
+            }
+            renderStoreCatalog();
+        }
+
+        function changeStorePage(delta) {
+            currentStorePage += delta;
+            renderStoreCatalog();
+        }
+
+        function renderStoreCatalog() {
+            var listEl = document.getElementById("store-catalog-list");
+            var pageBar = document.getElementById("store-pagination-bar");
+            listEl.innerHTML = "";
+
+            if (!remoteCatalog || remoteCatalog.length === 0) {
+                if (pageBar) pageBar.className = "hidden";
+                listEl.innerHTML = '<div class="store-card">No apps listed in this repository yet.</div>';
+                return;
+            }
+
+            var filteredIndices = [];
+            for (var i = 0; i < remoteCatalog.length; i++) {
+                var itemCat = getAppCategory(remoteCatalog[i]);
+                if (currentStoreCategory === "all" || itemCat === currentStoreCategory) {
+                    filteredIndices.push(i);
+                }
+            }
+
+            if (filteredIndices.length === 0) {
+                if (pageBar) pageBar.className = "hidden";
+                listEl.innerHTML = '<div class="store-card">No apps in this category yet.</div>';
+                return;
+            }
+
+            var totalPages = Math.ceil(filteredIndices.length / STORE_ITEMS_PER_PAGE);
+            if (currentStorePage < 0) currentStorePage = 0;
+            if (currentStorePage >= totalPages) currentStorePage = totalPages - 1;
+
+            var startIdx = currentStorePage * STORE_ITEMS_PER_PAGE;
+            var endIdx = Math.min(startIdx + STORE_ITEMS_PER_PAGE, filteredIndices.length);
+
+            for (var p = startIdx; p < endIdx; p++) {
+                (function (idx) {
+                    var item = remoteCatalog[idx];
+                    var authorName = normalizeAuthorName(item.author);
+                    var isInstalled = !!installedApps[item.id];
+                    var catLabel = getAppCategory(item);
+                    catLabel = catLabel.charAt(0).toUpperCase() + catLabel.slice(1);
+
+                    var card = document.createElement("div");
+                    card.className = "store-card";
+                    card.style.padding = "8px 10px";
+                    card.style.marginBottom = "7px";
+
+                    var titleDiv = document.createElement("div");
+                    titleDiv.className = "store-card-title";
+                    titleDiv.style.fontSize = "17px";
+                    titleDiv.innerHTML = escapePlain(item.name || item.id) +
+                        " <small>[v" + escapePlain(item.version || "1.0") + " &bull; " + escapePlain(catLabel) + "]</small>";
+                    card.appendChild(titleDiv);
+
+                    var descDiv = document.createElement("div");
+                    descDiv.className = "store-card-desc";
+                    descDiv.style.marginBottom = "6px";
+                    descDiv.innerHTML = escapePlain(item.description || "No description provided.");
+                    card.appendChild(descDiv);
+
+                    var btnRow = document.createElement("div");
+
+                    var dlBtn = document.createElement("button");
+                    dlBtn.type = "button";
+                    dlBtn.className = isInstalled ? "btn-sm" : "btn-sm btn-selected";
+                    dlBtn.innerHTML = isInstalled ? "Update" : "Download";
+                    dlBtn.onclick = function () {
+                        downloadAppFromStore(idx);
+                    };
+                    btnRow.appendChild(dlBtn);
+
+                    if (isInstalled) {
+                        var openBtn = document.createElement("button");
+                        openBtn.type = "button";
+                        openBtn.className = "btn-sm btn-selected";
+                        openBtn.innerHTML = "Launch";
+                        openBtn.onclick = function () {
+                            launchDownloadedApp(item.id);
+                        };
+                        btnRow.appendChild(openBtn);
+
+                        var delBtn = document.createElement("button");
+                        delBtn.type = "button";
+                        delBtn.className = "btn-sm";
+                        delBtn.innerHTML = "Uninstall";
+                        delBtn.onclick = function () {
+                            uninstallApp(item.id);
+                        };
+                        btnRow.appendChild(delBtn);
+                    }
+
+                    card.appendChild(btnRow);
+                    listEl.appendChild(card);
+                })(filteredIndices[p]);
+            }
+
+            if (pageBar) {
+                if (totalPages > 1) {
+                    pageBar.className = "";
+                    document.getElementById("store-page-label").innerHTML = "Page " + (currentStorePage + 1) + " / " + totalPages;
+                    document.getElementById("store-prev-btn").disabled = (currentStorePage <= 0);
+                    document.getElementById("store-next-btn").disabled = (currentStorePage >= totalPages - 1);
+                } else {
+                    pageBar.className = "hidden";
+                }
+            }
+        }
+
+        function downloadAppFromStore(idx) {
+            var item = remoteCatalog[idx];
+            if (!item || !item.id) return;
+            var statusBox = document.getElementById("store-status-box");
+
+            if (item.html) {
+                var appRecord = {
+                    id: item.id,
+                    name: item.name || item.id,
+                    version: item.version || "1.0",
+                    author: normalizeAuthorName(item.author),
+                    category: getAppCategory(item),
+                    requiresAi: isAppAiPowered(item),
+                    description: item.description || "",
+                    diskPath: "/khub/apps/" + item.id + "/index.html",
+                    html: item.html
+                };
+                upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appRecord);
+                installedApps[item.id] = appRecord;
+                saveInstalledApps();
+                persistAppToDiskFolder(appRecord);
+                statusBox.innerHTML = "Downloaded '" + escapePlain(item.name) + "' to /khub/apps/" + escapePlain(item.id) + "/!";
+                renderStoreCatalog();
+                renderLauncherInstalledApps();
+            } else if (item.codeUrl) {
+                statusBox.innerHTML = "Downloading to /khub/apps/" + escapePlain(item.id) + "/...";
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 15000;
+                xhr.open("GET", item.codeUrl + (item.codeUrl.indexOf("?") === -1 ? "?" : "&") + "_t=" + new Date().getTime(), true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            var appRecord = {
+                                id: item.id,
+                                name: item.name || item.id,
+                                version: item.version || "1.0",
+                                author: normalizeAuthorName(item.author),
+                                category: getAppCategory(item),
+                    requiresAi: isAppAiPowered(item),
+                                description: item.description || "",
+                                diskPath: "/khub/apps/" + item.id + "/index.html",
+                                html: xhr.responseText
+                            };
+                            upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appRecord);
+                            installedApps[item.id] = appRecord;
+                            saveInstalledApps();
+                            persistAppToDiskFolder(appRecord);
+                            statusBox.innerHTML = "Downloaded '" + escapePlain(item.name) + "' to /khub/apps/" + escapePlain(item.id) + "/!";
+                            renderStoreCatalog();
+                            renderLauncherInstalledApps();
+                        } else {
+                            statusBox.innerHTML = "Failed to download app file (HTTP " + xhr.status + ").";
+                        }
+                    }
+                };
+                xhr.send(null);
+            } else {
+                statusBox.innerHTML = "Error: App entry has no 'html' or 'codeUrl' field.";
+            }
+        }
+
+        function uninstallApp(appId) {
+            if (installedApps[appId]) {
+                var removedName = installedApps[appId].name;
+                delete installedApps[appId];
+                saveInstalledApps();
+                removeAppFromDiskFolder(appId);
+                document.getElementById("store-status-box").innerHTML = "Uninstalled '" + escapePlain(removedName) + "' from /khub/apps/" + escapePlain(appId) + "/.";
+                renderStoreCatalog();
+                renderLauncherInstalledApps();
+            }
+        }
+
+        function mountDownloadedAppDom(app) {
+            upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(app);
+            var container = document.getElementById("installed-app-container");
+
+            var renderCode = function (htmlStr) {
+                container.innerHTML = htmlStr;
+                var scripts = container.getElementsByTagName("script");
+                for (var i = 0; i < scripts.length; i++) {
+                    var code = scripts[i].text || scripts[i].textContent || scripts[i].innerHTML || "";
+                    if (code) {
+                        try {
+                            window.eval(code);
+                        } catch (e) {}
+                    }
+                }
+            };
+
+            /* Try loading from on-device /khub/apps/<id>/index.html first, falling back to cached html */
+            try {
+                var dXhr = new XMLHttpRequest();
+                dXhr.timeout = 1500;
+                dXhr.open("GET", "apps/" + encodeURIComponent(app.id) + "/index.html", true);
+                dXhr.onreadystatechange = function () {
+                    if (dXhr.readyState === 4) {
+                        if (dXhr.status >= 200 && dXhr.status < 300 && dXhr.responseText) {
+                            app.html = dXhr.responseText;
+                            upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(app);
+                            renderCode(app.html);
+                        } else {
+                            renderCode(app.html);
+                        }
+                    }
+                };
+                dXhr.send(null);
+            } catch (e) {
+                renderCode(app.html);
+            }
+        }
+
+        function launchDownloadedApp(appId) {
+            var app = installedApps[appId];
+            if (!app) return;
+
+            if (isAppAiPowered(app) && !hasGlobalApiKey()) {
+                showAiKeyRequiredPopup(app.name || "AI App");
+                return;
+            }
+
+            currentLaunchedAppId = appId;
+            var noticeEl = document.getElementById("installed-app-notice");
+            noticeEl.className = "store-card hidden";
+            noticeEl.innerHTML = "";
+
+            openScreen("installed-app-screen");
+            document.getElementById("installed-app-title").innerHTML = escapePlain(app.name);
+            mountDownloadedAppDom(app);
+
+            if (typeof navigator !== "undefined" && navigator.onLine === false) {
+                return;
+            }
+
+            if (!hasCheckedStoreOnce) {
+                hasCheckedStoreOnce = true;
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 8000;
+                var checkUrl = STORE_REPO_URL + (STORE_REPO_URL.indexOf("?") === -1 ? "?" : "&") + "_t=" + new Date().getTime();
+                xhr.open("GET", checkUrl, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                            try {
+                                var data = JSON.parse(xhr.responseText);
+                                var appsArr = data.apps || (data instanceof Array ? data : []);
+                                for (var i = 0; i < appsArr.length; i++) {
+                                    appsArr[i].author = normalizeAuthorName(appsArr[i].author);
+                                    upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(appsArr[i]);
+                                }
+                                remoteCatalog = appsArr;
+                                checkLaunchedAppAgainstStore(appId);
+                            } catch (e) {}
+                        }
+                    }
+                };
+                try {
+                    xhr.send(null);
+                } catch (e) {}
+            } else if (remoteCatalog && remoteCatalog.length > 0) {
+                checkLaunchedAppAgainstStore(appId);
+            }
+        }
+
+        function checkLaunchedAppAgainstStore(appId) {
+            if (currentLaunchedAppId !== appId) return;
+            var app = installedApps[appId];
+            if (!app || !remoteCatalog) return;
+
+            var remoteItem = null;
+            for (var i = 0; i < remoteCatalog.length; i++) {
+                if (remoteCatalog[i].id === appId) {
+                    remoteItem = remoteCatalog[i];
+                    break;
+                }
+            }
+
+            var noticeEl = document.getElementById("installed-app-notice");
+            if (!remoteItem) {
+                if (ignoredRemovedApps[appId]) return;
+                noticeEl.className = "store-card";
+                noticeEl.innerHTML = '<div class="store-card-title">Warning: App No Longer in Store</div>' +
+                    '<div class="store-card-desc">This application is no longer in the KHub App Store.</div>' +
+                    '<button type="button" class="btn-sm btn-selected" onclick="deleteRemovedLaunchedApp()">Delete</button> ' +
+                    '<button type="button" class="btn-sm" onclick="ignoreRemovedLaunchedApp()">Ignore</button>';
+            } else if (String(remoteItem.version || "1.0") !== String(app.version || "1.0")) {
+                var ignoreKey = appId + "@" + String(remoteItem.version || "1.0");
+                if (ignoredUpdateApps[ignoreKey]) return;
+                noticeEl.className = "store-card";
+                noticeEl.innerHTML = '<div class="store-card-title">Update Available (v' + escapePlain(remoteItem.version) + ')</div>' +
+                    '<div class="store-card-desc">A newer update for ' + escapePlain(app.name) + ' is available in the store.</div>' +
+                    '<button type="button" class="btn-sm btn-selected" onclick="updateLaunchedAppNow()">Update</button> ' +
+                    '<button type="button" class="btn-sm" onclick="ignoreUpdateLaunchedApp(\'' + escapePlain(ignoreKey) + '\')">Ignore</button>';
+            }
+        }
+
+        function deleteRemovedLaunchedApp() {
+            if (!currentLaunchedAppId) return;
+            var id = currentLaunchedAppId;
+            currentLaunchedAppId = null;
+            if (installedApps[id]) {
+                delete installedApps[id];
+                saveInstalledApps();
+                removeAppFromDiskFolder(id);
+            }
+            openScreen("launcher-screen");
+        }
+
+        function ignoreRemovedLaunchedApp() {
+            if (currentLaunchedAppId) {
+                ignoredRemovedApps[currentLaunchedAppId] = true;
+            }
+            var noticeEl = document.getElementById("installed-app-notice");
+            noticeEl.className = "store-card hidden";
+        }
+
+        function updateLaunchedAppNow() {
+            if (!currentLaunchedAppId || !remoteCatalog) return;
+            var idx = -1;
+            for (var i = 0; i < remoteCatalog.length; i++) {
+                if (remoteCatalog[i].id === currentLaunchedAppId) {
+                    idx = i;
+                    break;
+                }
+            }
+            if (idx === -1) return;
+            var item = remoteCatalog[idx];
+            if (item.html) {
+                var updatedRec = {
+                    id: item.id,
+                    name: item.name || item.id,
+                    version: item.version || "1.0",
+                    author: normalizeAuthorName(item.author),
+                    category: getAppCategory(item),
+                    requiresAi: isAppAiPowered(item),
+                    description: item.description || "",
+                    diskPath: "/khub/apps/" + item.id + "/index.html",
+                    html: item.html
+                };
+                upgradeDownloadedAppHtmlTo31LiteAndUnifiedKey(updatedRec);
+                installedApps[item.id] = updatedRec;
+                saveInstalledApps();
+                persistAppToDiskFolder(updatedRec);
+                document.getElementById("installed-app-notice").className = "store-card hidden";
+                mountDownloadedAppDom(installedApps[item.id]);
+            } else if (item.codeUrl) {
+                downloadAppFromStore(idx);
+                document.getElementById("installed-app-notice").className = "store-card hidden";
+            }
+        }
+
+        function ignoreUpdateLaunchedApp(ignoreKey) {
+            if (ignoreKey) {
+                ignoredUpdateApps[ignoreKey] = true;
+            }
+            document.getElementById("installed-app-notice").className = "store-card hidden";
+        }
+
+        /* --- RSS NEWS FETCHER (GEMINI 3.1 FLASH LITE ONLY, UNIFIED API KEY, HOURLY RELOAD) --- */
+        var DEFAULT_RSS_FEED = "https://www.theguardian.com/us-news/rss";
+        var RSS_RELOAD_INTERVAL_MS = 3600000;
+        var rssFeedsList = [DEFAULT_RSS_FEED];
+        var activeRssFeedUrl = DEFAULT_RSS_FEED;
+        var lastRssFetchTimestamp = 0;
+        var cachedRssSummaries = [];
+        var isRssFetching = false;
+
+        function loadRssConfig() {
+            try {
+                if (window.localStorage) {
+                    var rawFeeds = window.localStorage.getItem("khub_rss_feeds_v1");
+                    if (rawFeeds) {
+                        var parsed = JSON.parse(rawFeeds);
+                        if (parsed && parsed.length > 0) {
+                            rssFeedsList = parsed;
+                        }
+                    }
+                    var hasDefault = false;
+                    for (var i = 0; i < rssFeedsList.length; i++) {
+                        if (rssFeedsList[i] === DEFAULT_RSS_FEED) {
+                            hasDefault = true;
+                            break;
+                        }
+                    }
+                    if (!hasDefault) {
+                        rssFeedsList.unshift(DEFAULT_RSS_FEED);
+                    }
+                    var savedActive = window.localStorage.getItem("khub_rss_active_v1");
+                    if (savedActive) {
+                        activeRssFeedUrl = savedActive;
+                    }
+                }
+            } catch (e) {
+                rssFeedsList = [DEFAULT_RSS_FEED];
+                activeRssFeedUrl = DEFAULT_RSS_FEED;
+            }
+        }
+
+        function saveRssConfig() {
+            try {
+                if (window.localStorage) {
+                    window.localStorage.setItem("khub_rss_feeds_v1", JSON.stringify(rssFeedsList));
+                    window.localStorage.setItem("khub_rss_active_v1", activeRssFeedUrl);
+                }
+            } catch (e) {}
+        }
+
+        function toggleRssSettings() {
+            var panel = document.getElementById("rss-settings-panel");
+            if (panel.className.indexOf("hidden") !== -1) {
+                renderRssSettingsFeeds();
+                panel.className = "settings-panel";
+            } else {
+                panel.className = "settings-panel hidden";
+            }
+        }
+
+        function renderRssSettingsFeeds() {
+            var listEl = document.getElementById("rss-feeds-settings-list");
+            if (!listEl) return;
+            var html = "";
+            for (var i = 0; i < rssFeedsList.length; i++) {
+                var url = rssFeedsList[i];
+                var isCurrent = (url === activeRssFeedUrl);
+                html += '<div style="border: 2px solid #000000; padding: 6px; margin-bottom: 6px; word-wrap: break-word;">' +
+                    '<div style="font-weight: bold; margin-bottom: 4px;">' + escapePlain(url) + '</div>' +
+                    '<button type="button" class="btn-sm ' + (isCurrent ? 'btn-selected' : '') + '" onclick="selectRssFeedUrl(' + i + ')">' +
+                    (isCurrent ? 'Selected' : 'Use Feed') + '</button> ';
+                if (url !== DEFAULT_RSS_FEED) {
+                    html += '<button type="button" class="btn-sm" onclick="removeCustomRssFeed(' + i + ')">Remove</button>';
+                }
+                html += '</div>';
+            }
+            listEl.innerHTML = html;
+        }
+
+        function addCustomRssFeed() {
+            var inputEl = document.getElementById("rss-custom-input");
+            var val = inputEl.value.replace(/^\s+|\s+$/g, "");
+            if (!val) return;
+            if (val.indexOf("http://") !== 0 && val.indexOf("https://") !== 0) {
+                val = "https://" + val;
+            }
+            var exists = false;
+            for (var i = 0; i < rssFeedsList.length; i++) {
+                if (rssFeedsList[i] === val) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                rssFeedsList.push(val);
+            }
+            activeRssFeedUrl = val;
+            inputEl.value = "";
+            saveRssConfig();
+            renderRssSettingsFeeds();
+            loadRssStories(true);
+        }
+
+        function selectRssFeedUrl(idx) {
+            if (idx < 0 || idx >= rssFeedsList.length) return;
+            activeRssFeedUrl = rssFeedsList[idx];
+            saveRssConfig();
+            renderRssSettingsFeeds();
+            loadRssStories(true);
+        }
+
+        function removeCustomRssFeed(idx) {
+            if (idx <= 0 || idx >= rssFeedsList.length) return;
+            var removed = rssFeedsList[idx];
+            rssFeedsList.splice(idx, 1);
+            if (activeRssFeedUrl === removed) {
+                activeRssFeedUrl = DEFAULT_RSS_FEED;
+            }
+            saveRssConfig();
+            renderRssSettingsFeeds();
+            loadRssStories(true);
+        }
+
+        function openRssScreen() {
+            if (!hasGlobalApiKey()) {
+                showAiKeyRequiredPopup("RSS News");
+                return;
+            }
+            openScreen("rss-screen");
+            loadRssConfig();
+            renderRssSettingsFeeds();
+            var now = new Date().getTime();
+            if (cachedRssSummaries.length === 0 || (now - lastRssFetchTimestamp) >= RSS_RELOAD_INTERVAL_MS) {
+                loadRssStories(true);
+            } else {
+                renderRssStoriesList(cachedRssSummaries);
+            }
+        }
+
+        function showRssLoadingUI() {
+            var container = document.getElementById("rss-stories-container");
+            container.innerHTML = '<div class="store-card" style="text-align: center; padding: 24px;">' +
+                '<div class="store-card-title" style="font-size: 20px; margin: 0;">Loading stories...</div>' +
+                '</div>';
+        }
+
+        function showRssOfflineUI() {
+            var container = document.getElementById("rss-stories-container");
+            container.innerHTML = '<div class="store-card" style="text-align: center; padding: 26px;">' +
+                '<div style="width: 96px; height: 72px; margin: 0 auto 8px auto;">' +
+                '<svg viewBox="0 0 96 72" width="96" height="72" xmlns="http://www.w3.org/2000/svg">' +
+                '<path d="M26 56 H72 C82 56 88 49 88 40 C88 32 82 25 74 24 C71 12 60 6 47 6 C33 6 22 15 20 27 C12 28 6 35 6 43 C6 51 13 56 26 56 Z" fill="#ffffff" stroke="#000000" stroke-width="4"/>' +
+                '<line x1="37" y1="25" x2="59" y2="47" stroke="#000000" stroke-width="5"/>' +
+                '<line x1="59" y1="25" x2="37" y2="47" stroke="#000000" stroke-width="5"/>' +
+                '</svg>' +
+                '</div>' +
+                '<div class="store-card-title" style="font-size: 22px; margin: 0;">Offline</div>' +
+                '</div>';
+        }
+
+        function stripAllHtmlAndImages(rawStr) {
+            if (!rawStr) return "";
+            var s = String(rawStr);
+            s = s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+            s = s.replace(/<script[\s\S]*?<\/script>/gi, " ");
+            s = s.replace(/<style[\s\S]*?<\/style>/gi, " ");
+            s = s.replace(/<img[^>]*>/gi, " ");
+            s = s.replace(/<figure[\s\S]*?<\/figure>/gi, " ");
+            s = s.replace(/<[^>]+>/g, " ");
+            s = s.replace(/&nbsp;/gi, " ")
+                 .replace(/&amp;/gi, "&")
+                 .replace(/&quot;/gi, '"')
+                 .replace(/&#39;|&apos;/gi, "'")
+                 .replace(/&lt;/gi, "<")
+                 .replace(/&gt;/gi, ">")
+                 .replace(/&#8217;|&#8216;/g, "'")
+                 .replace(/&#8220;|&#8221;/g, '"')
+                 .replace(/&#8211;|&#8212;/g, "-");
+            s = s.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+            return s;
+        }
+
+        function parseXmlFeedToArticles(xmlText) {
+            var articles = [];
+            if (!xmlText) return articles;
+            var parts = xmlText.split(/<item[\s>]/i);
+            if (parts.length <= 1) {
+                parts = xmlText.split(/<entry[\s>]/i);
+            }
+            for (var i = 1; i < parts.length && articles.length < 6; i++) {
+                var block = parts[i];
+                var titleMatch = block.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+                var descMatch = block.match(/<description[^>]*>([\s\S]*?)<\/description>/i);
+                if (!descMatch) {
+                    descMatch = block.match(/<summary[^>]*>([\s\S]*?)<\/summary>/i) || block.match(/<content[^>]*>([\s\S]*?)<\/content>/i);
+                }
+                var titleText = titleMatch ? stripAllHtmlAndImages(titleMatch[1]) : "";
+                var descText = descMatch ? stripAllHtmlAndImages(descMatch[1]) : "";
+                if (titleText) {
+                    if (descText.length > 450) {
+                        descText = descText.substring(0, 450) + "...";
+                    }
+                    articles.push({
+                        title: titleText,
+                        summary: descText || titleText
+                    });
+                }
+            }
+            return articles;
+        }
+
+        function loadRssStories(forceReload) {
+            if (!hasGlobalApiKey()) {
+                showAiKeyRequiredPopup("RSS News");
+                return;
+            }
+            if (isRssFetching) return;
+            var now = new Date().getTime();
+            if (!forceReload && cachedRssSummaries.length > 0 && (now - lastRssFetchTimestamp) < RSS_RELOAD_INTERVAL_MS) {
+                renderRssStoriesList(cachedRssSummaries);
+                return;
+            }
+
+            if (typeof navigator !== "undefined" && navigator.onLine === false) {
+                showRssOfflineUI();
+                return;
+            }
+
+            isRssFetching = true;
+            showRssLoadingUI();
+
+            fetchRawRssArticles(activeRssFeedUrl, function (ok, rawArticles) {
+                if (!ok || !rawArticles || rawArticles.length === 0) {
+                    isRssFetching = false;
+                    showRssOfflineUI();
+                    return;
+                }
+                summarizeArticlesWithGemini31Lite(rawArticles, true, function (sumOk, summarizedArticles) {
+                    isRssFetching = false;
+                    if (!sumOk || !summarizedArticles || summarizedArticles.length === 0) {
+                        showRssOfflineUI();
+                        return;
+                    }
+                    cachedRssSummaries = summarizedArticles;
+                    lastRssFetchTimestamp = new Date().getTime();
+                    renderRssStoriesList(cachedRssSummaries);
+                });
+            });
+        }
+
+        function fetchRawRssArticles(feedUrl, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 12000;
+            xhr.ontimeout = function () {
+                fetchRawRssViaRss2Json(feedUrl, callback);
+            };
+            xhr.onerror = function () {
+                fetchRawRssViaRss2Json(feedUrl, callback);
+            };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        var parsed = parseXmlFeedToArticles(xhr.responseText);
+                        if (parsed.length > 0) {
+                            callback(true, parsed);
+                            return;
+                        }
+                    }
+                    fetchRawRssViaRss2Json(feedUrl, callback);
+                }
+            };
+            try {
+                xhr.open("GET", feedUrl, true);
+                xhr.send(null);
+            } catch (e) {
+                fetchRawRssViaRss2Json(feedUrl, callback);
+            }
+        }
+
+        function fetchRawRssViaRss2Json(feedUrl, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 12000;
+            var apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feedUrl);
+            xhr.ontimeout = function () {
+                fetchRawRssViaAllOrigins(feedUrl, callback);
+            };
+            xhr.onerror = function () {
+                fetchRawRssViaAllOrigins(feedUrl, callback);
+            };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            if (data && data.items && data.items.length > 0) {
+                                var list = [];
+                                for (var i = 0; i < data.items.length && list.length < 6; i++) {
+                                    var t = stripAllHtmlAndImages(data.items[i].title);
+                                    var d = stripAllHtmlAndImages(data.items[i].description || data.items[i].content);
+                                    if (t) {
+                                        if (d.length > 450) d = d.substring(0, 450) + "...";
+                                        list.push({ title: t, summary: d || t });
+                                    }
+                                }
+                                if (list.length > 0) {
+                                    callback(true, list);
+                                    return;
+                                }
+                            }
+                        } catch (e) {}
+                    }
+                    fetchRawRssViaAllOrigins(feedUrl, callback);
+                }
+            };
+            try {
+                xhr.open("GET", apiUrl, true);
+                xhr.send(null);
+            } catch (e) {
+                fetchRawRssViaAllOrigins(feedUrl, callback);
+            }
+        }
+
+        function fetchRawRssViaAllOrigins(feedUrl, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 12000;
+            var proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(feedUrl);
+            xhr.ontimeout = function () { callback(false, null); };
+            xhr.onerror = function () { callback(false, null); };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        var parsed = parseXmlFeedToArticles(xhr.responseText);
+                        if (parsed.length > 0) {
+                            callback(true, parsed);
+                            return;
+                        }
+                    }
+                    callback(false, null);
+                }
+            };
+            try {
+                xhr.open("GET", proxyUrl, true);
+                xhr.send(null);
+            } catch (e) {
+                callback(false, null);
+            }
+        }
+
+        function summarizeArticlesWithGemini31Lite(rawArticles, includeThinkingConfig, callback) {
+            var apiKey = getGlobalApiKey();
+            if (!apiKey) {
+                callback(true, rawArticles);
+                return;
+            }
+            var lines = [
+                "[System: Summarize each news article into a short, easy-to-read plain-text summary (2-3 concise sentences) with a clear news title. Text only, no images or markdown links. Return ONLY a JSON array of objects with keys \"title\" and \"summary\".]",
+                ""
+            ];
+            for (var i = 0; i < rawArticles.length; i++) {
+                lines.push("Article " + (i + 1) + " Title: " + rawArticles[i].title);
+                lines.push("Article " + (i + 1) + " Content: " + rawArticles[i].summary);
+                lines.push("");
+            }
+
+            var genCfg = {
+                maxOutputTokens: 800
+            };
+            if (includeThinkingConfig) {
+                genCfg.thinkingConfig = { thinkingBudget: 0 };
+            }
+
+            var reqObj = {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [{ text: lines.join("\n") }]
+                    }
+                ],
+                generationConfig: genCfg
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 20000;
+            var url = GEMINI_31_LITE_URL + "?key=" + encodeURIComponent(apiKey);
+
+            xhr.ontimeout = function () {
+                callback(false, null);
+            };
+            xhr.onerror = function () {
+                callback(false, null);
+            };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            var textOut = "";
+                            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+                                for (var p = 0; p < data.candidates[0].content.parts.length; p++) {
+                                    if (data.candidates[0].content.parts[p].text) {
+                                        textOut += data.candidates[0].content.parts[p].text;
+                                    }
+                                }
+                            }
+                            var cleaned = textOut.replace(/```json/gi, "").replace(/```/g, "").replace(/^\s+|\s+$/g, "");
+                            var startIdx = cleaned.indexOf("[");
+                            var endIdx = cleaned.lastIndexOf("]");
+                            if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+                                cleaned = cleaned.substring(startIdx, endIdx + 1);
+                            }
+                            var parsedArr = JSON.parse(cleaned);
+                            if (parsedArr && parsedArr.length > 0) {
+                                var out = [];
+                                for (var k = 0; k < parsedArr.length; k++) {
+                                    out.push({
+                                        title: stripAllHtmlAndImages(parsedArr[k].title || (rawArticles[k] && rawArticles[k].title) || "News Story"),
+                                        summary: stripAllHtmlAndImages(parsedArr[k].summary || "")
+                                    });
+                                }
+                                callback(true, out);
+                                return;
+                            }
+                        } catch (e) {}
+                        callback(true, rawArticles);
+                    } else if (xhr.status === 400 && includeThinkingConfig) {
+                        summarizeArticlesWithGemini31Lite(rawArticles, false, callback);
+                    } else if (xhr.status === 0) {
+                        callback(false, null);
+                    } else {
+                        callback(true, rawArticles);
+                    }
+                }
+            };
+
+            try {
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(reqObj));
+            } catch (e) {
+                callback(false, null);
+            }
+        }
+
+        function renderRssStoriesList(articles) {
+            var container = document.getElementById("rss-stories-container");
+            if (!container) return;
+            var html = "";
+            for (var i = 0; i < articles.length; i++) {
+                html += '<div class="store-card">' +
+                    '<div class="store-card-title">' + escapePlain(articles[i].title) + '</div>' +
+                    '<div class="store-card-desc" style="font-size: 16px; line-height: 1.4; margin-bottom: 0;">' + escapePlain(articles[i].summary) + '</div>' +
+                    '</div>';
+            }
+            container.innerHTML = html;
+        }
+
+        setInterval(function () {
+            var now = new Date().getTime();
+            if (lastRssFetchTimestamp > 0 && (now - lastRssFetchTimestamp) >= RSS_RELOAD_INTERVAL_MS) {
+                var rssScr = document.getElementById("rss-screen");
+                if (rssScr && rssScr.className.indexOf("hidden") === -1) {
+                    loadRssStories(true);
+                } else {
+                    cachedRssSummaries = [];
+                }
+            }
+        }, 60000);
+
+        /* --- TIC TAC TOE LOGIC --- */
+        var board = ["", "", "", "", "", "", "", "", ""];
+        var currentPlayer = "X";
+        var gameActive = true;
+        var vsAI = true;
+        var aiDifficulty = "Medium"; // "Easy", "Medium", "Hard"
+        var scores = { X: 0, O: 0, D: 0 };
+
+        var wins = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function makeMove(idx) {
+            if (!gameActive || board[idx] !== "") return;
+
+            placeMark(idx, currentPlayer);
+            if (checkEnd(currentPlayer)) return;
+
+            currentPlayer = (currentPlayer === "X") ? "O" : "X";
+            document.getElementById("ttt-status").innerHTML = "Player " + currentPlayer + "'s Turn";
+
+            if (vsAI && currentPlayer === "O" && gameActive) {
+                setTimeout(aiTurn, 120);
+            }
+        }
+
+        function placeMark(idx, player) {
+            board[idx] = player;
+            document.getElementById("c" + idx).innerHTML = player;
+        }
+
+        function aiTurn() {
+            if (!gameActive) return;
+            var move;
+            if (aiDifficulty === "Hard") {
+                move = findMinimaxMove();
+            } else if (aiDifficulty === "Medium") {
+                move = findMediumMove();
+            } else {
+                move = findEasyMove();
+            }
+            placeMark(move, "O");
+            if (checkEnd("O")) return;
+            currentPlayer = "X";
+            document.getElementById("ttt-status").innerHTML = "Player X's Turn";
+        }
+
+        function findEasyMove() {
+            var empty = [];
+            for (var i = 0; i < 9; i++) {
+                if (board[i] === "") empty.push(i);
+            }
+            return empty[Math.floor(Math.random() * empty.length)];
+        }
+
+        function findMediumMove() {
+            var i;
+            for (i = 0; i < 9; i++) {
+                if (board[i] === "") {
+                    board[i] = "O";
+                    if (isWinner("O")) { board[i] = ""; return i; }
+                    board[i] = "";
+                }
+            }
+            if (Math.random() < 0.75) {
+                for (i = 0; i < 9; i++) {
+                    if (board[i] === "") {
+                        board[i] = "X";
+                        if (isWinner("X")) { board[i] = ""; return i; }
+                        board[i] = "";
+                    }
+                }
+            }
+            if (Math.random() < 0.5) {
+                return findMinimaxMove();
+            }
+            return findEasyMove();
+        }
+
+        function minimax(b, depth, isMaximizing) {
+            if (isWinnerBoard(b, "O")) return 10 - depth;
+            if (isWinnerBoard(b, "X")) return depth - 10;
+            var hasEmpty = false;
+            for (var i = 0; i < 9; i++) {
+                if (b[i] === "") { hasEmpty = true; break; }
+            }
+            if (!hasEmpty) return 0;
+
+            if (isMaximizing) {
+                var best = -1000;
+                for (var j = 0; j < 9; j++) {
+                    if (b[j] === "") {
+                        b[j] = "O";
+                        var val = minimax(b, depth + 1, false);
+                        b[j] = "";
+                        if (val > best) best = val;
+                    }
+                }
+                return best;
+            } else {
+                var bestMin = 1000;
+                for (var k = 0; k < 9; k++) {
+                    if (b[k] === "") {
+                        b[k] = "X";
+                        var valMin = minimax(b, depth + 1, true);
+                        b[k] = "";
+                        if (valMin < bestMin) bestMin = valMin;
+                    }
+                }
+                return bestMin;
+            }
+        }
+
+        function findMinimaxMove() {
+            var bestVal = -1000;
+            var bestMoves = [];
+            for (var i = 0; i < 9; i++) {
+                if (board[i] === "") {
+                    board[i] = "O";
+                    var moveVal = minimax(board, 0, false);
+                    board[i] = "";
+                    if (moveVal > bestVal) {
+                        bestVal = moveVal;
+                        bestMoves = [i];
+                    } else if (moveVal === bestVal) {
+                        bestMoves.push(i);
+                    }
+                }
+            }
+            return bestMoves[Math.floor(Math.random() * bestMoves.length)];
+        }
+
+        function isWinnerBoard(b, p) {
+            for (var i = 0; i < wins.length; i++) {
+                var a = wins[i][0], c = wins[i][1], d = wins[i][2];
+                if (b[a] === p && b[c] === p && b[d] === p) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function isWinner(p) {
+            return isWinnerBoard(board, p);
+        }
+
+        function checkEnd(p) {
+            if (isWinner(p)) {
+                document.getElementById("ttt-status").innerHTML = (vsAI && p === "O") ? "AI Wins!" : "Player " + p + " Wins!";
+                gameActive = false;
+                scores[p]++;
+                updateScoreUI();
+                return true;
+            }
+            var full = true;
+            for (var i = 0; i < 9; i++) {
+                if (board[i] === "") { full = false; break; }
+            }
+            if (full) {
+                document.getElementById("ttt-status").innerHTML = "It's a Draw!";
+                gameActive = false;
+                scores.D++;
+                updateScoreUI();
+                return true;
+            }
+            return false;
+        }
+
+        function updateScoreUI() {
+            document.getElementById("score-x").innerHTML = scores.X;
+            document.getElementById("score-o").innerHTML = scores.O;
+            document.getElementById("score-d").innerHTML = scores.D;
+        }
+
+        function resetGame() {
+            for (var i = 0; i < 9; i++) {
+                board[i] = "";
+                document.getElementById("c" + i).innerHTML = "";
+            }
+            currentPlayer = "X";
+            gameActive = true;
+            document.getElementById("ttt-status").innerHTML = "Player X's Turn";
+        }
+
+        function toggleMode() {
+            vsAI = !vsAI;
+            document.getElementById("mode-btn").innerHTML = vsAI ? "Mode: vs AI" : "Mode: 2 Player";
+            document.getElementById("diff-btn").className = vsAI ? "btn" : "btn hidden";
+            resetGame();
+        }
+
+        function toggleDifficulty() {
+            if (aiDifficulty === "Easy") {
+                aiDifficulty = "Medium";
+            } else if (aiDifficulty === "Medium") {
+                aiDifficulty = "Hard";
+            } else {
+                aiDifficulty = "Easy";
+            }
+            document.getElementById("diff-btn").innerHTML = "AI: " + aiDifficulty;
+            resetGame();
+        }
+
+        /* --- LEMONADE STAND GAME --- */
+        var weatherTypes = [
+            { name: "Heatwave (96°F) - Huge Thirst!", mult: 1.75, idealPrice: 1.75 },
+            { name: "Hot & Sunny (88°F) - High Demand", mult: 1.35, idealPrice: 1.50 },
+            { name: "Sunny & Warm (78°F) - Good Demand", mult: 1.00, idealPrice: 1.25 },
+            { name: "Partly Cloudy (68°F) - Normal Demand", mult: 0.75, idealPrice: 1.00 },
+            { name: "Cool & Windy (58°F) - Low Demand", mult: 0.45, idealPrice: 0.75 },
+            { name: "Rainy & Cold (50°F) - Very Slow", mult: 0.25, idealPrice: 0.50 }
+        ];
+
+        var lemState = {
+            day: 1,
+            money: 20.00,
+            totalProfit: 0.00,
+            spentToday: 0.00,
+            lemons: 10,
+            sugar: 10,
+            cups: 25,
+            signs: 0,
+            price: 1.00,
+            weatherIdx: 2,
+            minutesFrom8AM: 0,
+            soldToday: 0,
+            revToday: 0.00,
+            running: false,
+            timer: null
+        };
+
+        function loadLemonadeState() {
+            try {
+                if (window.localStorage) {
+                    var saved = window.localStorage.getItem("khub_lemonade_v1");
+                    if (saved) {
+                        var parsed = JSON.parse(saved);
+                        lemState.day = parsed.day || 1;
+                        lemState.money = (typeof parsed.money === "number") ? parsed.money : 20.00;
+                        lemState.totalProfit = (typeof parsed.totalProfit === "number") ? parsed.totalProfit : 0.00;
+                        lemState.spentToday = (typeof parsed.spentToday === "number") ? parsed.spentToday : 0.00;
+                        lemState.lemons = parsed.lemons || 0;
+                        lemState.sugar = parsed.sugar || 0;
+                        lemState.cups = parsed.cups || 0;
+                        lemState.signs = parsed.signs || 0;
+                        lemState.price = parsed.price || 1.00;
+                        lemState.weatherIdx = (typeof parsed.weatherIdx === "number") ? parsed.weatherIdx : 2;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function saveLemonadeState() {
+            try {
+                if (window.localStorage) {
+                    window.localStorage.setItem("khub_lemonade_v1", JSON.stringify({
+                        day: lemState.day,
+                        money: lemState.money,
+                        totalProfit: lemState.totalProfit,
+                        spentToday: lemState.spentToday,
+                        lemons: lemState.lemons,
+                        sugar: lemState.sugar,
+                        cups: lemState.cups,
+                        signs: lemState.signs,
+                        price: lemState.price,
+                        weatherIdx: lemState.weatherIdx
+                    }));
+                }
+            } catch (e) {}
+        }
+
+        function getMaxMakeableCups() {
+            return Math.min(lemState.lemons, Math.min(lemState.sugar, lemState.cups));
+        }
+
+        function formatMoney(val) {
+            return val.toFixed(2);
+        }
+
+        function formatClock(minsFrom8AM) {
+            var totalMins = 8 * 60 + minsFrom8AM;
+            var hrs24 = Math.floor(totalMins / 60);
+            var mins = totalMins % 60;
+            var ampm = (hrs24 >= 12) ? "PM" : "AM";
+            var hrs12 = hrs24 % 12;
+            if (hrs12 === 0) hrs12 = 12;
+            var minStr = (mins < 10) ? ("0" + mins) : String(mins);
+            return hrs12 + ":" + minStr + " " + ampm;
+        }
+
+        function updateLemonadeUI() {
+            document.getElementById("lem-day").innerHTML = lemState.day;
+            document.getElementById("lem-money").innerHTML = formatMoney(lemState.money);
+            document.getElementById("lem-profit").innerHTML = formatMoney(lemState.totalProfit);
+            document.getElementById("lem-weather").innerHTML = weatherTypes[lemState.weatherIdx].name;
+
+            document.getElementById("inv-lemons").innerHTML = lemState.lemons;
+            document.getElementById("inv-sugar").innerHTML = lemState.sugar;
+            document.getElementById("inv-cups").innerHTML = lemState.cups;
+            document.getElementById("inv-signs").innerHTML = lemState.signs;
+
+            document.getElementById("lem-price").innerHTML = formatMoney(lemState.price);
+            document.getElementById("live-price").innerHTML = formatMoney(lemState.price);
+            document.getElementById("lem-max-cups").innerHTML = getMaxMakeableCups();
+        }
+
+        function buySupply(item, qty, cost) {
+            if (lemState.running) return;
+            if (lemState.money + 0.001 < cost) {
+                document.getElementById("lem-msg").innerHTML = "Not enough cash! Need $" + formatMoney(cost) + ".";
+                return;
+            }
+            lemState.money -= cost;
+            lemState.spentToday += cost;
+            lemState[item] += qty;
+            document.getElementById("lem-msg").innerHTML = "Bought +" + qty + " " + item + " for $" + formatMoney(cost) + ".";
+            saveLemonadeState();
+            updateLemonadeUI();
+        }
+
+        function changePrice(delta) {
+            var next = lemState.price + delta;
+            if (next < 0.25) next = 0.25;
+            if (next > 5.00) next = 5.00;
+            lemState.price = Math.round(next * 100) / 100;
+            saveLemonadeState();
+            updateLemonadeUI();
+        }
+
+        function appendLemLog(msg) {
+            var logEl = document.getElementById("lem-log");
+            var row = document.createElement("div");
+            row.style.marginBottom = "4px";
+            row.innerHTML = msg;
+            logEl.appendChild(row);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function startLemonadeDay() {
+            if (lemState.running) return;
+            if (getMaxMakeableCups() <= 0) {
+                document.getElementById("lem-msg").innerHTML = "You need at least 1 Lemon, 1 Sugar, and 1 Cup to open!";
+                return;
+            }
+
+            lemState.running = true;
+            lemState.minutesFrom8AM = 0;
+            lemState.soldToday = 0;
+            lemState.revToday = 0.00;
+
+            document.getElementById("lem-prep-view").className = "hidden";
+            document.getElementById("lem-run-view").className = "";
+            document.getElementById("lem-end-controls").className = "hidden";
+            document.getElementById("lem-log").innerHTML = "";
+
+            document.getElementById("lem-clock").innerHTML = "8:00 AM";
+            document.getElementById("live-sold").innerHTML = "0";
+            document.getElementById("live-rev").innerHTML = "0.00";
+            document.getElementById("live-left").innerHTML = getMaxMakeableCups();
+
+            appendLemLog("<strong>8:00 AM:</strong> Stand is OPEN! (" + lemState.signs + " ad signs active)");
+            lemState.timer = setInterval(tickLemonadeInterval, 1000);
+        }
+
+        function tickLemonadeInterval() {
+            if (!lemState.running) return;
+            lemState.minutesFrom8AM += 10;
+            var clockStr = formatClock(lemState.minutesFrom8AM);
+            document.getElementById("lem-clock").innerHTML = clockStr;
+
+            var maxAvailable = getMaxMakeableCups();
+            if (maxAvailable > 0) {
+                var w = weatherTypes[lemState.weatherIdx];
+                var rushMult = (lemState.minutesFrom8AM >= 210 && lemState.minutesFrom8AM <= 390) ? 1.4 : 1.0;
+                var signMult = 1.0 + Math.min(lemState.signs, 10) * 0.18;
+                var priceRatio = w.idealPrice / lemState.price;
+                var priceFactor = priceRatio * priceRatio;
+                if (lemState.price > w.idealPrice * 2.2) {
+                    priceFactor = 0.05;
+                }
+
+                var expectedSales = 0.85 * w.mult * rushMult * signMult * priceFactor;
+                var soldNow = Math.floor(expectedSales);
+                if (Math.random() < (expectedSales - soldNow)) {
+                    soldNow += 1;
+                }
+
+                if (soldNow > maxAvailable) {
+                    soldNow = maxAvailable;
+                }
+
+                if (soldNow > 0) {
+                    lemState.lemons -= soldNow;
+                    lemState.sugar -= soldNow;
+                    lemState.cups -= soldNow;
+                    var earned = soldNow * lemState.price;
+                    lemState.money += earned;
+                    lemState.revToday += earned;
+                    lemState.soldToday += soldNow;
+
+                    document.getElementById("lem-money").innerHTML = formatMoney(lemState.money);
+                    document.getElementById("live-sold").innerHTML = lemState.soldToday;
+                    document.getElementById("live-rev").innerHTML = formatMoney(lemState.revToday);
+                    document.getElementById("live-left").innerHTML = getMaxMakeableCups();
+
+                    appendLemLog("<strong>" + clockStr + ":</strong> Sold " + soldNow + " cup" + (soldNow > 1 ? "s" : "") + " (+$" + formatMoney(earned) + ")");
+                }
+
+                if (getMaxMakeableCups() <= 0) {
+                    appendLemLog("<strong>" + clockStr + ": SOLD OUT of ingredients!</strong>");
+                    finishLemonadeDay("Sold Out");
+                    return;
+                }
+            }
+
+            if (lemState.minutesFrom8AM >= 540) {
+                finishLemonadeDay("5:00 PM Closing Time");
+            }
+        }
+
+        function closeStandEarly() {
+            if (!lemState.running) return;
+            finishLemonadeDay("Closed Early at " + formatClock(lemState.minutesFrom8AM));
+        }
+
+        function finishLemonadeDay(reason) {
+            if (lemState.timer) {
+                clearInterval(lemState.timer);
+                lemState.timer = null;
+            }
+            lemState.running = false;
+
+            var netToday = lemState.revToday - lemState.spentToday;
+            lemState.totalProfit += netToday;
+            var netStr = (netToday >= 0 ? "+$" : "-$") + formatMoney(Math.abs(netToday));
+
+            var spoiled = Math.floor(lemState.lemons * 0.25);
+            lemState.lemons -= spoiled;
+            lemState.signs = 0;
+
+            appendLemLog("<hr style='border:1px solid #000;'><strong>Day " + lemState.day + " Ended (" + reason + ")</strong><br>" +
+                "Sold: <strong>" + lemState.soldToday + " cups</strong> | Revenue: <strong>$" + formatMoney(lemState.revToday) + "</strong><br>" +
+                "Day Net Profit: <strong>" + netStr + "</strong>" +
+                (spoiled > 0 ? "<br>Overnight: " + spoiled + " leftover lemon(s) spoiled." : ""));
+
+            document.getElementById("lem-profit").innerHTML = formatMoney(lemState.totalProfit);
+            document.getElementById("lem-end-controls").className = "";
+            saveLemonadeState();
+        }
+
+        function nextLemonadeDay() {
+            lemState.day += 1;
+            lemState.spentToday = 0.00;
+            lemState.weatherIdx = Math.floor(Math.random() * weatherTypes.length);
+            saveLemonadeState();
+
+            document.getElementById("lem-run-view").className = "hidden";
+            document.getElementById("lem-prep-view").className = "";
+            document.getElementById("lem-msg").innerHTML = "Day " + lemState.day + " Morning: Check the forecast and stock up!";
+            updateLemonadeUI();
+        }
+
+        function resetLemonadeGame() {
+            if (lemState.timer) {
+                clearInterval(lemState.timer);
+                lemState.timer = null;
+            }
+            lemState.running = false;
+            lemState.day = 1;
+            lemState.money = 20.00;
+            lemState.totalProfit = 0.00;
+            lemState.spentToday = 0.00;
+            lemState.lemons = 10;
+            lemState.sugar = 10;
+            lemState.cups = 25;
+            lemState.signs = 0;
+            lemState.price = 1.00;
+            lemState.weatherIdx = 2;
+            saveLemonadeState();
+
+            document.getElementById("lem-run-view").className = "hidden";
+            document.getElementById("lem-prep-view").className = "";
+            document.getElementById("lem-msg").innerHTML = "Business reset to Day 1 with $20.00 and starter supplies!";
+            updateLemonadeUI();
+        }
+
+        function leaveLemonadeScreen() {
+            if (lemState.running) {
+                closeStandEarly();
+            }
+            openScreen("launcher-screen");
+        }
+
+        /* --- AI CHAT LOGIC (LOCKED TO GEMINI 3.1 FLASH LITE ONLY, ZERO IN-APP CONFIG) --- */
+        var chatHistory = [];
+        var isWaiting = false;
+        var ecoFastMode = true;
+
+        function toggleEcoMode() {
+            ecoFastMode = !ecoFastMode;
+            document.getElementById("eco-btn").innerHTML = ecoFastMode ? "Eco: Fast" : "Eco: Full";
+        }
+
+        function handleKeyDown(e) {
+            var key = e.keyCode || e.which;
+            if (key === 13) {
+                if (e.preventDefault) e.preventDefault();
+                sendChatMessage();
+                return false;
+            }
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
+        }
+
+        function renderExchange(userText, roleLabel, replyText) {
+            var log = document.getElementById("chat-log");
+            var frag = document.createDocumentFragment();
+
+            var userDiv = document.createElement("div");
+            userDiv.className = "msg-row";
+            userDiv.innerHTML = '<span class="msg-role">You:</span> <span>' + escapeHtml(userText) + '</span>';
+            frag.appendChild(userDiv);
+
+            var aiDiv = document.createElement("div");
+            aiDiv.className = "msg-row";
+            aiDiv.innerHTML = '<span class="msg-role">' + escapeHtml(roleLabel) + ':</span> <span>' + escapeHtml(replyText) + '</span>';
+            frag.appendChild(aiDiv);
+
+            log.appendChild(frag);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function clearChat() {
+            chatHistory = [];
+            document.getElementById("chat-log").innerHTML = '<div class="msg-row"><span class="msg-role">AI:</span> <span>Chat cleared. Ready!</span></div>';
+        }
+
+        function setLoadingState(loading) {
+            isWaiting = loading;
+            var inputEl = document.getElementById("chat-input");
+            var sendBtn = document.getElementById("send-btn");
+            inputEl.disabled = loading;
+            sendBtn.disabled = loading;
+            inputEl.placeholder = loading ? "Waiting for AI..." : "Type message and press Enter...";
+        }
+
+        function sendChatMessage() {
+            if (isWaiting) return false;
+            var apiKey = getGlobalApiKey();
+            if (!apiKey) {
+                showAiKeyRequiredPopup("Kindle AI Chat");
+                return false;
+            }
+
+            var inputEl = document.getElementById("chat-input");
+            var text = inputEl.value.replace(/^\s+|\s+$/g, "");
+            if (!text) return false;
+
+            inputEl.value = "";
+            inputEl.blur();
+            setLoadingState(true);
+
+            if (chatHistory.length > 6) {
+                chatHistory = chatHistory.slice(chatHistory.length - 6);
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 20000;
+            var finalUrl = GEMINI_31_LITE_URL + "?key=" + encodeURIComponent(apiKey);
+
+            var contentsToSend = [];
+            for (var i = 0; i < chatHistory.length; i++) {
+                contentsToSend.push(chatHistory[i]);
+            }
+            var promptText = ecoFastMode ? "[System: Be concise and direct. Keep answers brief to save e-ink screen space.]\n" + text : text;
+            contentsToSend.push({ role: "user", parts: [{ text: promptText }] });
+            chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+            var reqObj = {
+                contents: contentsToSend
+            };
+            if (ecoFastMode) {
+                reqObj.generationConfig = {
+                    maxOutputTokens: 300
+                };
+            }
+            var payload = JSON.stringify(reqObj);
+            xhr.open("POST", finalUrl, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.ontimeout = function () {
+                setLoadingState(false);
+                if (chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === "user") {
+                    chatHistory.pop();
+                }
+                renderExchange(text, "Error", "Request timed out after 20s.");
+            };
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    setLoadingState(false);
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        try {
+                            var data = JSON.parse(xhr.responseText);
+                            var reply = "";
+                            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+                                reply = data.candidates[0].content.parts[0].text;
+                                chatHistory.push({ role: "model", parts: [{ text: reply }] });
+                            } else {
+                                reply = xhr.responseText;
+                            }
+                            renderExchange(text, "AI", reply);
+                        } catch (err) {
+                            if (chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === "user") {
+                                chatHistory.pop();
+                            }
+                            renderExchange(text, "Error", "Failed to parse API response.");
+                        }
+                    } else if (xhr.status !== 0) {
+                        if (chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === "user") {
+                            chatHistory.pop();
+                        }
+                        var errMsg = "HTTP " + xhr.status;
+                        if (xhr.responseText) {
+                            try {
+                                var errObj = JSON.parse(xhr.responseText);
+                                if (errObj.error && errObj.error.message) {
+                                    errMsg += ": " + errObj.error.message;
+                                }
+                            } catch (e) {}
+                        }
+                        renderExchange(text, "Error", errMsg);
+                    } else {
+                        if (chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === "user") {
+                            chatHistory.pop();
+                        }
+                        renderExchange(text, "Error", "Network error (ensure Wi-Fi is ON).");
+                    }
+                }
+            };
+
+            xhr.send(payload);
+            return false;
+        }
+
+        /* --- INITIALIZATION ON STARTUP --- */
+        syncPermanentStorageOnBoot();
+        loadTextZoom();
+        loadInstalledApps();
+        renderLauncherInstalledApps();
+        loadLemonadeState();
+
+        /* Automatically check GitHub for updates once on Application Launcher load */
+        setTimeout(function () {
+            if (!hasCheckedGithubUpdateOnBoot) {
+                hasCheckedGithubUpdateOnBoot = true;
+                checkForKhubUpdates(false, true);
+            }
+        }, 1200);
+    </script>
+</body>
+</html>

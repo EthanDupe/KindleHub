@@ -1,0 +1,10 @@
+{
+  "id": "khub-flashcards",
+  "name": "AI Study Flashcards",
+  "version": "1.0",
+  "author": "EthanDupe",
+  "category": "productivity",
+  "requiresAi": true,
+  "description": "Generate custom 8-card tap-to-flip study decks on any subject powered by Gemini 3.1 Flash Lite.",
+  "diskPath": "/khub/apps/khub-flashcards/index.html"
+}

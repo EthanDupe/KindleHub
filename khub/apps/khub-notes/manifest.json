@@ -1,0 +1,10 @@
+{
+  "id": "khub-notes",
+  "name": "Quick Notes",
+  "version": "1.0",
+  "author": "EthanDupe",
+  "category": "productivity",
+  "requiresAi": false,
+  "description": "E-Ink scratchpad that saves notes directly on your Kindle.",
+  "diskPath": "/khub/apps/khub-notes/index.html"
+}
