@@ -1,0 +1,10 @@
+{
+  "id": "khub-wordle",
+  "name": "Word Guess E-Ink",
+  "version": "1.0",
+  "author": "EthanDupe",
+  "category": "games",
+  "requiresAi": false,
+  "description": "High-contrast 5-letter word puzzle optimized for E-Ink (Black = Exact, Dashed = Wrong Spot, Light = Miss).",
+  "diskPath": "/khub/apps/khub-wordle/index.html"
+}
