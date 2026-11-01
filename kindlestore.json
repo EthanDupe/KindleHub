@@ -1,12 +1,12 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "1.7",
+  "khubVersion": "1.8",
   "storeChangelog": [
     {
-      "version": "Store v1.7",
-      "title": "Store v1.7 \u2014 Store Categories with Icons, Auto-Fit Launcher & Instant Key Sync",
-      "markdown": "## Store v1.7 Updates\n- **Store Categories with Icons**: Filter store apps by **Games**, **Productivity**, and **Misc** with E-Ink icons and zero-scroll pagination.\n- **Launcher Categories & Auto-Fit**: Main launcher now organizes built-in and downloaded apps by category (`All`, `Games`, `Productivity`, `Misc`) and auto-fits buttons onto a single screen.\n- **Instant Remote API Key Receive & Auto-Stop**: Pasting your Gemini key on Phone/PC immediately fills the Kindle input box, saves permanently, and stops the web server automatically.\n- **4 New Store Apps**: Added **Word Guess E-Ink**, **E-Ink Sudoku**, **AI Study Flashcards**, and **Pomodoro & Habit Tracker**."
+      "version": "Store v1.8",
+      "title": "Store v1.8 \u2014 Classic Menu Categories, Fixed OTA Updater & Store Icons",
+      "markdown": "## Store v1.8 Updates\n- **Fixed OTA System Updater**: Downloads the latest update directly via browser HTTPS + local helper daemon so updates never loop or stay stuck.\n- **Fixed Remote API Key Delivery & Auto-Stop**: Uses static `state.js` HTTP polling + `httpd` URL log capture + `/var/local/khub_www` CGI so pasting your key on Phone/PC immediately fills the Kindle input box, saves permanently, and stops the server.\n- **Classic v1.6 Menu with Category Buttons**: Restored the classic full-width KHub menu (`KHub App Store`, `Games`, `Productivity`, `Misc`, `Settings`) with built-in and downloaded apps inside each category.\n- **App Store Categories with Icons**: Filter store apps by **Games**, **Productivity**, **Misc**, and **All**."
     },
     {
       "version": "Store v1.5",
