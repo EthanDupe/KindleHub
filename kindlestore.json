@@ -1,8 +1,13 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "1.8",
+  "khubVersion": "1.9",
   "storeChangelog": [
+    {
+      "version": "Store v1.9",
+      "title": "Store v1.9 \u2014 Launcher & App Plugins + Multi-Feed Offline RSS",
+      "markdown": "## Store v1.9 Updates\n- **App Store Plugins**: Added a new **Plugins** category in the KHub App Store and a **Plugins** manager button on the main menu to enable, disable, or uninstall plugins that change how the App Launcher and apps perform.\n- **Multi-Feed Minimalist RSS**: Add and run multiple RSS feeds simultaneously with a thinner minimalist E-Ink layout.\n- **Last Updated Day & Time**: Displays the exact day of the week and time of the last RSS update (`Last Updated: Sunday, 1:05 PM`).\n- **Offline-Safe Startup RSS Sync**: Only checks Wi-Fi to update RSS once when KHub starts up, preserving all cached stories when offline instead of wiping them."
+    },
     {
       "version": "Store v1.8",
       "title": "Store v1.8 \u2014 Classic Menu Categories, Fixed OTA Updater & Store Icons",
@@ -89,6 +94,66 @@
       "requiresAi": false,
       "description": "Low-refresh E-Ink focus timer (25m / 5m) and daily habit checklist saved on your Kindle.",
       "html": "<div style='text-align:center;padding:6px;'><div style='border:4px solid #000;padding:12px;margin-bottom:10px;'><div id='kpom-mode' style='font-size:16px;font-weight:bold;text-transform:uppercase;'>Focus Session (25 Min)</div><div id='kpom-time' style='font-size:44px;font-weight:bold;margin:6px 0;font-family:monospace;'>25:00</div><div><button type='button' class='btn btn-selected' id='kpom-btn' onclick='kpomToggle()'>Start</button> <button type='button' class='btn' onclick='kpomReset(25,\"Focus Session (25 Min)\")'>25m Focus</button> <button type='button' class='btn' onclick='kpomReset(5,\"Short Break (5 Min)\")'>5m Break</button></div></div><div style='border:3px solid #000;padding:10px;text-align:left;'><div style='font-size:17px;font-weight:bold;margin-bottom:6px;border-bottom:2px solid #000;padding-bottom:4px;'>Daily Habits Checklist</div><div id='kpom-habits'></div><div style='margin-top:8px;'><button type='button' class='btn-sm' onclick='kpomClearHabits()'>Reset Checks</button></div></div></div><script>var kpomSec=1500,kpomRun=false,kpomTimer=null,kpomHabits=[{name:'Read 20 pages on Kindle',done:false},{name:'Drink 8 glasses of water',done:false},{name:'Complete 1 Focus Session',done:false},{name:'Write in Quick Notes',done:false}];try{var sh=localStorage.getItem('khub_pom_habits');if(sh)kpomHabits=JSON.parse(sh);}catch(e){}function kpomDrawTime(){var m=Math.floor(kpomSec/60),s=kpomSec%60;document.getElementById('kpom-time').innerHTML=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);}function kpomToggle(){kpomRun=!kpomRun;document.getElementById('kpom-btn').innerHTML=kpomRun?'Pause':'Start';if(kpomRun){if(kpomTimer)clearInterval(kpomTimer);kpomTimer=setInterval(function(){if(kpomSec>0){kpomSec-=5;if(kpomSec<0)kpomSec=0;kpomDrawTime();}else{kpomRun=false;clearInterval(kpomTimer);document.getElementById('kpom-btn').innerHTML='Start';document.getElementById('kpom-mode').innerHTML='Session Complete!';}},5000);}else if(kpomTimer){clearInterval(kpomTimer);}}function kpomReset(mins,lbl){kpomRun=false;if(kpomTimer)clearInterval(kpomTimer);kpomSec=mins*60;document.getElementById('kpom-mode').innerHTML=lbl;document.getElementById('kpom-btn').innerHTML='Start';kpomDrawTime();}function kpomDrawHabits(){var h='';for(var i=0;i<kpomHabits.length;i++){var it=kpomHabits[i];h+='<div onclick=\"kpomFlipHabit('+i+')\" style=\"padding:8px 6px;border-bottom:1px dashed #000;cursor:pointer;font-size:16px;\"><strong>'+(it.done?'[X] ':'[ ] ')+'</strong><span style=\"'+(it.done?'text-decoration:line-through;':'')+'\">'+it.name+'</span></div>';}document.getElementById('kpom-habits').innerHTML=h;}function kpomFlipHabit(i){kpomHabits[i].done=!kpomHabits[i].done;try{localStorage.setItem('khub_pom_habits',JSON.stringify(kpomHabits));}catch(e){}kpomDrawHabits();}function kpomClearHabits(){for(var i=0;i<kpomHabits.length;i++)kpomHabits[i].done=false;try{localStorage.setItem('khub_pom_habits',JSON.stringify(kpomHabits));}catch(e){}kpomDrawHabits();}kpomDrawTime();kpomDrawHabits();</script>"
+    },
+    {
+      "id": "plugin-compact-grid",
+      "name": "Compact 2-Column Grid",
+      "version": "1.0",
+      "author": "EthanDupe",
+      "category": "plugins",
+      "isPlugin": true,
+      "requiresAi": false,
+      "description": "Plugin: Transforms the App Launcher main menu and category screens into a fast 2-column side-by-side button grid so everything fits compactly.",
+      "pluginCss": "#launcher-screen .launcher-btn, #launcher-screen .launcher-btn-installed, #category-items-list .launcher-btn, #category-items-list .launcher-btn-installed { display: inline-block !important; width: 45% !important; margin: 5px 1.5% !important; padding: 14px 8px !important; font-size: 20px !important; vertical-align: top !important; }",
+      "html": "<div style='padding:12px;text-align:left;'><h3>Compact 2-Column Grid Plugin</h3><p>Transforms the KHub App Launcher and Category screens into a 2-column tile layout. Manage or toggle this plugin from the <strong>Plugins</strong> menu on the home screen.</p></div>"
+    },
+    {
+      "id": "plugin-eink-night",
+      "name": "Inverted Night E-Ink Mode",
+      "version": "1.0",
+      "author": "EthanDupe",
+      "category": "plugins",
+      "isPlugin": true,
+      "requiresAi": false,
+      "description": "Plugin: Switches the App Launcher and all built-in/downloaded apps into high-contrast Inverted Dark Mode (black canvas, crisp white ink) for low-light reading.",
+      "pluginCss": "body, .store-card, .clean-setting-row, .md-box, .lem-box, .lem-clock-bar, #chat-log, #lem-log, .modal-box, .version-footer, table.board td, #chat-input, .changelog-select, .settings-panel, .rss-thin-card, .rss-meta-bar { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn, .btn-sm, .launcher-btn, .launcher-btn-installed, .store-cat-btn { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn-selected, .store-cat-btn-active { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; } .top-bar, .modal-title, .section-divider { border-color: #ffffff !important; } table.board { border-color: #ffffff !important; }",
+      "html": "<div style='padding:12px;text-align:left;'><h3>Inverted Night E-Ink Mode Plugin</h3><p>Applies a pure-black high-contrast inverted E-Ink theme across the entire launcher and all apps.</p></div>"
+    },
+    {
+      "id": "plugin-turbo-perf",
+      "name": "Turbo App & Game Boost",
+      "version": "1.0",
+      "author": "EthanDupe",
+      "category": "plugins",
+      "isPlugin": true,
+      "requiresAi": false,
+      "description": "Plugin: Doubles Lemonade Stand clock speed (2x faster simulation + +20% customer boost), makes Tic-Tac-Toe AI moves instant (0ms delay), and sharpens E-Ink borders.",
+      "pluginCss": "* { transition: none !important; animation: none !important; }",
+      "html": "<div style='padding:12px;text-align:left;'><h3>Turbo App &amp; Game Boost Plugin</h3><p>Speeds up Lemonade Stand simulation ticks by 2x, removes Tic-Tac-Toe AI thinking delay, and forces zero-latency E-Ink rendering.</p></div>"
+    },
+    {
+      "id": "plugin-status-hud",
+      "name": "Top Clock & Wi-Fi HUD Bar",
+      "version": "1.0",
+      "author": "EthanDupe",
+      "category": "plugins",
+      "isPlugin": true,
+      "requiresAi": false,
+      "description": "Plugin: Adds a minimalist status HUD bar at the top of the launcher and apps displaying live Day of Week, Time, Wi-Fi state, and active plugin count.",
+      "pluginCss": "",
+      "html": "<div style='padding:12px;text-align:left;'><h3>Top Clock &amp; Wi-Fi HUD Bar Plugin</h3><p>Displays a minimalist status bar at the very top of KHub with the current Day, Time, Wi-Fi status, and quick Home access.</p></div>"
+    },
+    {
+      "id": "plugin-direct-home",
+      "name": "All-Apps Direct Home View",
+      "version": "1.0",
+      "author": "EthanDupe",
+      "category": "plugins",
+      "isPlugin": true,
+      "requiresAi": false,
+      "description": "Plugin: Pins all built-in apps and downloaded store apps directly onto the Home Launcher screen for instant 1-tap launching without opening category menus.",
+      "pluginCss": "",
+      "html": "<div style='padding:12px;text-align:left;'><h3>All-Apps Direct Home View Plugin</h3><p>Shows quick-launch buttons for every built-in and installed app directly on the main Home screen.</p></div>"
     }
   ]
 }
