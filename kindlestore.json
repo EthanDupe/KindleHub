@@ -1,0 +1,21 @@
+{
+  "storeName": "KHub Community Store",
+  "apps": [
+    {
+      "id": "notes-app",
+      "name": "Quick Scratchpad",
+      "version": "1.0",
+      "author": "Eko",
+      "description": "Simple e-ink notepad that saves your text.",
+      "html": "<div style='padding:10px;'><h2>Scratchpad</h2><textarea id='pad' style='width:100%;height:300px;font-size:18px;border:3px solid #000;'></textarea><br><button class='btn' onclick=\"localStorage.setItem('pad_txt', document.getElementById('pad').value)\">Save Note</button></div>"
+    },
+    {
+      "id": "game-2048",
+      "name": "2048 E-Ink",
+      "version": "1.1",
+      "author": "Eko",
+      "description": "High-contrast 2048 puzzle game.",
+      "codeUrl": "https://raw.githubusercontent.com/your-username/khub-store/main/apps/2048.html"
+    }
+  ]
+}
