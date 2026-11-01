@@ -5,7 +5,7 @@
     {
       "id": "khub-notes",
       "name": "Quick Notes",
-      "version": "1.0",
+      "version": "1.1",
       "author": "EthanDupe",
       "description": "E-Ink scratchpad that saves notes directly on your Kindle.",
       "html": "<div style='text-align:left;padding:6px;'><h2 style='margin:4px 0 8px 0;'>Quick Scratchpad</h2><textarea id='khub-note-area' rows='10' style='width:100%;font-size:18px;padding:10px;border:3px solid #000;background:#fff;color:#000;' placeholder='Type your notes here...'></textarea><div style='margin-top:8px;'><button type='button' class='btn btn-selected' onclick='saveKhubNote()'>Save Note</button> <button type='button' class='btn' onclick='clearKhubNote()'>Clear</button> <span id='khub-note-status' style='font-weight:bold;margin-left:8px;'></span></div></div><script>function saveKhubNote(){try{localStorage.setItem('khub_user_note',document.getElementById('khub-note-area').value);document.getElementById('khub-note-status').innerHTML='Saved!'}catch(e){}}function clearKhubNote(){document.getElementById('khub-note-area').value='';saveKhubNote();document.getElementById('khub-note-status').innerHTML='Cleared!';}try{var s=localStorage.getItem('khub_user_note');if(s)document.getElementById('khub-note-area').value=s;}catch(e){}</script>"
