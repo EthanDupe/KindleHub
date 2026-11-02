@@ -1,8 +1,13 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "2.0",
+  "khubVersion": "2.1",
   "storeChangelog": [
+    {
+      "version": "Store v2.1",
+      "title": "Store v2.1 \u2014 Fixed App/System Updater, Reset Software, 1h Tracking & Low Power Mode",
+      "markdown": "## Store v2.1 Updates\n- **Fixed App & System Updater**: Separate app updates from full system updates, prevent disk state from reverting app versions, and write browser-fetched updates directly to disk.\n- **Reset Software Option**: Re-downloads KHub from GitHub to repair any errors while keeping your Kindle Tracking ID and API Key.\n- **Persistent Device Tracking ID (`khub/tracking_id.txt`)**: Generated on first open, tracks built-in app & store usage locally, and syncs to JSONBin once every 1 hour with preloading (with a Settings toggle to turn Tracking off).\n- **Low Power Mode & 20% Battery Warning**: Locks preloading to On-Demand to save battery and alerts you with a Battery-with-Bolt popup at 20% battery.\n- **1.5x RSS Text Scaling**: Adjusted RSS font scaling from 5x to 1.5x of your Settings zoom."
+    },
     {
       "version": "Store v2.0",
       "title": "Store v2.0 \u2014 Strictly Online Store, Smart Update Badges, Upgraded Quick Notes & Admin Panel",
