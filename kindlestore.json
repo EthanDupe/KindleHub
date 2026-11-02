@@ -1,12 +1,12 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "1.9",
+  "khubVersion": "2.0",
   "storeChangelog": [
     {
-      "version": "Store v1.9",
-      "title": "Store v1.9 \u2014 Launcher & App Plugins + Multi-Feed Offline RSS",
-      "markdown": "## Store v1.9 Updates\n- **App Store Plugins**: Added a new **Plugins** category in the KHub App Store and a **Plugins** manager button on the main menu to enable, disable, or uninstall plugins that change how the App Launcher and apps perform.\n- **Multi-Feed Minimalist RSS**: Add and run multiple RSS feeds simultaneously with a thinner minimalist E-Ink layout.\n- **Last Updated Day & Time**: Displays the exact day of the week and time of the last RSS update (`Last Updated: Sunday, 1:05 PM`).\n- **Offline-Safe Startup RSS Sync**: Only checks Wi-Fi to update RSS once when KHub starts up, preserving all cached stories when offline instead of wiping them."
+      "version": "Store v2.0",
+      "title": "Store v2.0 \u2014 Strictly Online Store, Smart Update Badges, Upgraded Quick Notes & Admin Panel",
+      "markdown": "## Store v2.0 Updates\n- **Strictly Online-Only App Store**: Zero preloaded apps on device; blocks all offline downloads and displays a Cloud-with-X `No connection to server` screen when offline.\n- **Accurate Offline vs. Server Error Detection**: Uses live un-cached internet probes to distinguish between no Wi-Fi/internet and an actual store server outage.\n- **Smart Update Badges & Button**: The `Update` button now only appears when a newer version is available, replacing the `Launch` button in dark highlight style alongside an upper-left download icon badge.\n- **Upgraded Quick Notes v2.0**: Multi-note slots (`Note 1`\u2013`Note 4`), note titles, adjustable font size, live word/character counter, and saved timestamps.\n- **Website Admin Panel & Maintenance Switch**: Live online Kindle telemetry and instant remote store maintenance lock via JSONBin.io."
     },
     {
       "version": "Store v1.8",
@@ -28,11 +28,11 @@
     {
       "id": "khub-notes",
       "name": "Quick Notes",
-      "version": "1.0",
+      "version": "2.0",
       "author": "EthanDupe",
       "requiresAi": false,
-      "description": "E-Ink scratchpad that saves notes directly on your Kindle.",
-      "html": "<div style='text-align:left;padding:6px;'><h2 style='margin:4px 0 8px 0;'>Quick Scratchpad</h2><textarea id='khub-note-area' rows='10' style='width:100%;font-size:18px;padding:10px;border:3px solid #000;background:#fff;color:#000;' placeholder='Type your notes here...'></textarea><div style='margin-top:8px;'><button type='button' class='btn btn-selected' onclick='saveKhubNote()'>Save Note</button> <button type='button' class='btn' onclick='clearKhubNote()'>Clear</button> <span id='khub-note-status' style='font-weight:bold;margin-left:8px;'></span></div></div><script>function saveKhubNote(){try{localStorage.setItem('khub_user_note',document.getElementById('khub-note-area').value);document.getElementById('khub-note-status').innerHTML='Saved!'}catch(e){}}function clearKhubNote(){document.getElementById('khub-note-area').value='';saveKhubNote();document.getElementById('khub-note-status').innerHTML='Cleared!';}try{var s=localStorage.getItem('khub_user_note');if(s)document.getElementById('khub-note-area').value=s;}catch(e){}</script>",
+      "description": "Multi-tab E-Ink notebook (4 note slots, titles, word/char counter, adjustable font size, and bullet helper).",
+      "html": "<div style='text-align:left;padding:6px;'><div style='border-bottom:3px solid #000;padding-bottom:6px;margin-bottom:8px;'><strong style='font-size:20px;'>Quick Notes Pro</strong><span id='khub-note-status' style='float:right;font-size:13px;font-weight:bold;margin-top:3px;'>Saved</span></div><div style='margin-bottom:8px;'><button type='button' class='btn-sm btn-selected' id='kn-tab-0' onclick='knSwitchTab(0)'>Note 1</button> <button type='button' class='btn-sm' id='kn-tab-1' onclick='knSwitchTab(1)'>Note 2</button> <button type='button' class='btn-sm' id='kn-tab-2' onclick='knSwitchTab(2)'>Note 3</button> <button type='button' class='btn-sm' id='kn-tab-3' onclick='knSwitchTab(3)'>Note 4</button><span style='float:right;'><button type='button' class='btn-sm' onclick='knFont(-2)'>A-</button><button type='button' class='btn-sm' onclick='knFont(2)'>A+</button></span></div><input type='text' id='khub-note-title' placeholder='Note Title...' oninput='knAutoUpdateStats()' style='width:100%;font-size:18px;font-weight:bold;padding:8px 10px;margin-bottom:6px;border:3px solid #000;background:#fff;color:#000;'><textarea id='khub-note-area' rows='9' oninput='knAutoUpdateStats()' style='width:100%;font-size:20px;line-height:1.4;padding:10px;border:3px solid #000;background:#fff;color:#000;' placeholder='Write your note here...'></textarea><div style='margin-top:6px;font-size:13px;font-weight:bold;margin-bottom:8px;'><span id='khub-note-counts'>0 words &bull; 0 chars</span><span id='khub-note-time' style='float:right;'></span></div><div><button type='button' class='btn btn-selected' onclick='saveKhubNote()'>Save Note</button> <button type='button' class='btn' onclick='knInsertBullet()'>+ Bullet</button> <button type='button' class='btn' onclick='clearKhubNote()'>Clear Note</button></div></div><script>var knIdx=0,knFontSize=20,knData=[{title:'Note 1',body:'',updated:''},{title:'Note 2',body:'',updated:''},{title:'Note 3',body:'',updated:''},{title:'Note 4',body:'',updated:''}];function knLoadAll(){try{var raw=localStorage.getItem('khub_notes_pro_v2');if(raw){var p=JSON.parse(raw);if(p&&p.length===4)knData=p;}else{var old=localStorage.getItem('khub_user_note');if(old)knData[0].body=old;}var fz=parseInt(localStorage.getItem('khub_notes_fz')||'20',10);if(fz>=14&&fz<=34)knFontSize=fz;}catch(e){}knRender();}function knFormatTime(){var d=new Date(),h=d.getHours(),m=d.getMinutes(),ap=h>=12?'PM':'AM';h=h%12;if(h===0)h=12;return h+':'+(m<10?'0'+m:m)+' '+ap;}function knRender(){for(var i=0;i<4;i++){var b=document.getElementById('kn-tab-'+i);if(b){b.className=(i===knIdx)?'btn-sm btn-selected':'btn-sm';var t=(knData[i].title||('Note '+(i+1))).substring(0,10);b.innerHTML=t;}}var tEl=document.getElementById('khub-note-title'),aEl=document.getElementById('khub-note-area');if(tEl)tEl.value=knData[knIdx].title||('Note '+(knIdx+1));if(aEl){aEl.value=knData[knIdx].body||'';aEl.style.fontSize=knFontSize+'px';}var tmEl=document.getElementById('khub-note-time');if(tmEl)tmEl.innerHTML=knData[knIdx].updated?('Last saved: '+knData[knIdx].updated):'';knAutoUpdateStats();}function knAutoUpdateStats(){var aEl=document.getElementById('khub-note-area'),cEl=document.getElementById('khub-note-counts');if(!aEl||!cEl)return;var v=aEl.value||'',trimmed=v.replace(/^\\s+|\\s+$/g,'');var w=trimmed?trimmed.split(/\\s+/).length:0;cEl.innerHTML=w+' word'+(w===1?'':'s')+' &bull; '+v.length+' char'+(v.length===1?'':'s');}function knSwitchTab(n){saveKhubNote(true);knIdx=n;knRender();}function knFont(delta){knFontSize=Math.max(14,Math.min(32,knFontSize+delta));try{localStorage.setItem('khub_notes_fz',String(knFontSize));}catch(e){}var aEl=document.getElementById('khub-note-area');if(aEl)aEl.style.fontSize=knFontSize+'px';}function knInsertBullet(){var aEl=document.getElementById('khub-note-area');if(!aEl)return;var v=aEl.value||'';aEl.value=v+(v&&v.charAt(v.length-1)!=='\\n'?'\\n':'')+'\u2022 ';knAutoUpdateStats();saveKhubNote();}function saveKhubNote(silent){try{var tEl=document.getElementById('khub-note-title'),aEl=document.getElementById('khub-note-area');knData[knIdx].title=(tEl&&tEl.value)?tEl.value:('Note '+(knIdx+1));knData[knIdx].body=aEl?aEl.value:'';knData[knIdx].updated=knFormatTime();localStorage.setItem('khub_notes_pro_v2',JSON.stringify(knData));localStorage.setItem('khub_user_note',knData[0].body||'');if(!silent){var st=document.getElementById('khub-note-status');if(st)st.innerHTML='Saved at '+knData[knIdx].updated;knRender();}}catch(e){}}function clearKhubNote(){var aEl=document.getElementById('khub-note-area');if(aEl)aEl.value='';saveKhubNote(false);var st=document.getElementById('khub-note-status');if(st)st.innerHTML='Cleared!';}knLoadAll();</script>",
       "category": "productivity"
     },
     {
@@ -105,7 +105,7 @@
       "requiresAi": false,
       "description": "Plugin: Transforms the App Launcher main menu and category screens into a fast 2-column side-by-side button grid so everything fits compactly.",
       "pluginCss": "#launcher-screen .launcher-btn, #launcher-screen .launcher-btn-installed, #category-items-list .launcher-btn, #category-items-list .launcher-btn-installed { display: inline-block !important; width: 45% !important; margin: 5px 1.5% !important; padding: 14px 8px !important; font-size: 20px !important; vertical-align: top !important; }",
-      "html": "<div style='padding:12px;text-align:left;'><h3>Compact 2-Column Grid Plugin</h3><p>Transforms the KHub App Launcher and Category screens into a 2-column tile layout. Manage or toggle this plugin from the <strong>Plugins</strong> menu on the home screen.</p></div>"
+      "html": "<div style='padding:12px;text-align:left;'><h3>Compact 2-Column Grid Plugin</h3><p>Transforms the KHub App Launcher and Category screens into a 2-column tile layout.</p></div>"
     },
     {
       "id": "plugin-eink-night",
@@ -116,7 +116,7 @@
       "isPlugin": true,
       "requiresAi": false,
       "description": "Plugin: Switches the App Launcher and all built-in/downloaded apps into high-contrast Inverted Dark Mode (black canvas, crisp white ink) for low-light reading.",
-      "pluginCss": "body, .store-card, .clean-setting-row, .md-box, .lem-box, .lem-clock-bar, #chat-log, #lem-log, .modal-box, .version-footer, table.board td, #chat-input, .changelog-select, .settings-panel, .rss-thin-card, .rss-meta-bar { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn, .btn-sm, .launcher-btn, .launcher-btn-installed, .store-cat-btn { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn-selected, .store-cat-btn-active { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; } .top-bar, .modal-title, .section-divider { border-color: #ffffff !important; } table.board { border-color: #ffffff !important; }",
+      "pluginCss": "body, .store-card, .clean-setting-row, .md-box, .lem-box, .lem-clock-bar, #chat-log, #lem-log, .modal-box, .version-footer, table.board td, #chat-input, .changelog-select, .settings-panel, .rss-thin-card, .rss-meta-bar, #khub-plugin-hud { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn, .btn-sm, .launcher-btn, .launcher-btn-installed, .store-cat-btn { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; } .btn-selected, .store-cat-btn-active { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; } .top-bar, .modal-title, .section-divider { border-color: #ffffff !important; } table.board { border-color: #ffffff !important; }",
       "html": "<div style='padding:12px;text-align:left;'><h3>Inverted Night E-Ink Mode Plugin</h3><p>Applies a pure-black high-contrast inverted E-Ink theme across the entire launcher and all apps.</p></div>"
     },
     {
@@ -155,5 +155,10 @@
       "pluginCss": "",
       "html": "<div style='padding:12px;text-align:left;'><h3>All-Apps Direct Home View Plugin</h3><p>Shows quick-launch buttons for every built-in and installed app directly on the main Home screen.</p></div>"
     }
-  ]
+  ],
+  "maintenance": false,
+  "maintenanceMessage": "The KHub App Store is temporarily closed for scheduled maintenance. Please check back soon!",
+  "jsonbinBinId": "6ae7deadac6210605a6487bf",
+  "jsonbinApiKey": "$2a$10$K1K17nM8MoRYsSDEwHr5zu4NkSomPu2l3nB8v7zdPl4FzjwONQGC.",
+  "cloudStatusUrl": ""
 }
