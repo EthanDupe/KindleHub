@@ -1,12 +1,12 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "2.6",
+  "khubVersion": "2.7",
   "storeChangelog": [
     {
-      "version": "Store v2.6",
-      "title": "Store v2.6 \u2014 Multi-Engine All-File GitHub Updater, Simplified UNO (2P/Bots), Blackjack 21 & Deep Telemetry",
-      "markdown": "## Store v2.6 Updates\n- **Multi-Engine All-File GitHub Wireless Updater**: Downloads and installs **all project files** (`index.html`, `config.xml`, `khub.sh`, `kindlestore.json`, `kindle_state.js`, `cover.png`, `icon.png`, `admin.html`, `worker.js`, and installed store apps/plugins) via Raw GitHub, GitHub API, Cloudflare `/ota-bundle`, and GitHub Pages with disk read-back verification and in-app hot-swap activation.\n- **Simplified UNO (`khub-uno`) & Tabletop Blackjack 21 (`khub-blackjack`)**: Play 2-Player Top & Bottom on one Kindle or against 1\u20133 AI Bots.\n- **+25% Zoomed Store Games & New Titles**: Includes **E-Ink Hangman (2P & AI)**, **E-Ink Snake v2.0 (1P, 2P Dual Battle & 1P vs AI)**, **Connect Four (2P & AI)**, **Checkers (2P & AI)**, and **Minesweeper**.\n- **Upgraded Store Plugins**: **All-Games Zoom & Scale Booster**, **NOAA Emergency Weather Alert Monitor** (location-based, strictly active emergencies only), **E-Ink Ghosting Scrubber**, **Game Save Backup Vault**, and **In-Game Quick-Switch Dock**."
+      "version": "Store v2.7",
+      "title": "Store v2.7 \u2014 Multi-Engine All-File GitHub Updater, Simplified UNO (2P/Bots), Blackjack 21 & Deep Telemetry",
+      "markdown": "## Store v2.7 Updates\n- **Multi-Engine All-File GitHub Wireless Updater**: Downloads and installs **all project files** (`index.html`, `config.xml`, `khub.sh`, `kindlestore.json`, `kindle_state.js`, `cover.png`, `icon.png`, `admin.html`, `worker.js`, and installed store apps/plugins) via Raw GitHub, GitHub API, Cloudflare `/ota-bundle`, and GitHub Pages with disk read-back verification and in-app hot-swap activation.\n- **Simplified UNO (`khub-uno`) & Tabletop Blackjack 21 (`khub-blackjack`)**: Play 2-Player Top & Bottom on one Kindle or against 1\u20133 AI Bots.\n- **+25% Zoomed Store Games & New Titles**: Includes **E-Ink Hangman (2P & AI)**, **E-Ink Snake v2.0 (1P, 2P Dual Battle & 1P vs AI)**, **Connect Four (2P & AI)**, **Checkers (2P & AI)**, and **Minesweeper**.\n- **Upgraded Store Plugins**: **All-Games Zoom & Scale Booster**, **NOAA Emergency Weather Alert Monitor** (location-based, strictly active emergencies only), **E-Ink Ghosting Scrubber**, **Game Save Backup Vault**, and **In-Game Quick-Switch Dock**."
     },
     {
       "version": "Store v2.5",
