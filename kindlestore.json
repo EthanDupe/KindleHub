@@ -1,12 +1,12 @@
 {
   "storeName": "KHub Official App Store",
   "author": "EthanDupe",
-  "khubVersion": "2.8",
+  "khubVersion": "2.9",
   "storeChangelog": [
     {
-      "version": "Store v2.8",
-      "title": "Store v2.8 \u2014 Added Akinator E-Ink, Battleship (2P & AI), Apps Settings Category & Admin Popup/Force-Update",
-      "markdown": "## Store v2.8 Updates\n- **Added Akinator E-Ink (`khub-akinator`)**: Classic E-Ink mind-reading genie with live `Confidence: %`, 2-column 3D-bordered answer buttons (`YES`, `NO`, `DON'T KNOW`, `PROBABLY`, `PROBABLY NOT`), and dotted `BACK` button.\n- **Added Battleship E-Ink (2P & AI) (`khub-battleship`)**: Naval torpedo combat with 1P vs Smart AI Fleet and 2-Player Pass-and-Play mode.\n- **Apps Settings Integration**: Configure **NOAA Emergency Weather Alert** directly inside `Settings -> \ud83d\udcf1 Apps`.\n- **15-Second Store Auto-Check & Remote Admin Popups**: Auto-checks the store server every 15 seconds when offline and supports targeted Admin notifications and 10-second Force Update countdowns."
+      "version": "Store v2.9",
+      "title": "Store v2.9 \u2014 Pure Algorithmic Akinator (200 Chars), Battleship (2P & AI), Strict Maintenance Lock & Unified Zoom",
+      "markdown": "## Store v2.9 Updates\n- **Pure Algorithmic Akinator E-Ink (`khub-akinator`)**: 100% offline Bayesian entropy & multi-rival elimination algorithm across 200 characters and 45 trait dimensions.\n- **Battleship E-Ink (2P & AI) (`khub-battleship`)**: Naval torpedo combat with 1P vs Smart AI Fleet and 2-Player Pass-and-Play mode.\n- **Strict Maintenance Mode Verification**: Checks Maintenance Mode across Cloudflare + JSONBin before opening the store or downloading any app.\n- **15-Second Notification & Store Polling + Unified Zoom**: Checks admin notifications every 15 seconds (`Okay` button) and applies consistent zoom across all apps and screens."
     },
     {
       "version": "Store v2.5",
@@ -68,7 +68,7 @@
     {
       "id": "khub-akinator",
       "name": "Akinator E-Ink",
-      "version": "2.8",
+      "version": "2.9",
       "author": "EthanDupe",
       "category": "games",
       "requiresAi": false,
@@ -78,7 +78,7 @@
     {
       "id": "khub-battleship",
       "name": "Battleship E-Ink (2P & AI)",
-      "version": "2.8",
+      "version": "2.9",
       "author": "EthanDupe",
       "category": "games",
       "requiresAi": false,
@@ -218,14 +218,14 @@
     {
       "id": "plugin-game-scaler",
       "name": "All-Games Zoom & Scale Booster",
-      "version": "2.0",
+      "version": "2.9",
       "author": "EthanDupe",
       "category": "plugins",
       "isPlugin": true,
       "requiresAi": false,
       "description": "Plugin: Scales up all built-in and Store games by a customizable percentage (+15%, +25%, +35%, or +50%) for maximum E-Ink visibility.",
-      "pluginCss": "#ttt-screen, #lem-screen, #installed-app-container { zoom: 125%; } #ttt-screen table.board td { width: 130px !important; height: 130px !important; font-size: 74px !important; } #installed-app-container .btn, #ttt-screen .btn, #lem-screen .btn { font-size: 21px !important; padding: 12px 16px !important; }",
-      "pluginJs": "(function(){try{var oldIds=['plugin-compact-grid','plugin-eink-night','plugin-turbo-perf','plugin-status-hud','plugin-direct-home'];if(window.installedPlugins){var purged=false;for(var i=0;i<oldIds.length;i++){if(window.installedPlugins[oldIds[i]]){delete window.installedPlugins[oldIds[i]];purged=true;}}if(purged&&window.saveInstalledPlugins)window.saveInstalledPlugins();}}catch(e){}window.setKhubGameScalePct=function(pct){try{localStorage.setItem('khub_plugin_game_scale_pct',String(pct));}catch(e){}var st=document.getElementById('khub-game-scaler-dyn');if(!st){st=document.createElement('style');st.id='khub-game-scaler-dyn';(document.head||document.body).appendChild(st);}var z=parseInt(pct,10)||125;var css='#ttt-screen, #lem-screen, #installed-app-container { zoom: '+z+'% !important; }';if(st.styleSheet)st.styleSheet.cssText=css;else st.innerHTML=css;var lbl=document.getElementById('khub-gscale-lbl');if(lbl)lbl.innerHTML='Current Game Scale: '+z+'%';};var savedPct=125;try{savedPct=parseInt(localStorage.getItem('khub_plugin_game_scale_pct')||'125',10)||125;}catch(e){}window.setKhubGameScalePct(savedPct);setTimeout(function(){var box=document.getElementById('plugins-status-box');if(box&&!document.getElementById('khub-gscale-bar')){var d=document.createElement('div');d.id='khub-gscale-bar';d.style.marginTop='8px';d.style.paddingTop='8px';d.style.borderTop='2px solid #000';d.innerHTML='<strong id=\"khub-gscale-lbl\">Current Game Scale: '+savedPct+'%</strong> &mdash; '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(115)\">+15%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(125)\">+25%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(135)\">+35%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(150)\">+50%</button>';box.appendChild(d);}},200);})();",
+      "pluginCss": "",
+      "pluginJs": "(function(){window.setKhubGameScalePct=function(pct){var z=parseInt(pct,10)||100;try{localStorage.setItem('khub_plugin_game_scale_pct',String(z));}catch(e){}if(window.setTextZoom)window.setTextZoom(z,true);var lbl=document.getElementById('khub-gscale-lbl');if(lbl)lbl.innerHTML='Current Global & App Zoom: '+z+'%';};var savedPct=(window.currentTextZoom)||100;setTimeout(function(){var box=document.getElementById('plugins-status-box');if(box&&!document.getElementById('khub-gscale-bar')){var d=document.createElement('div');d.id='khub-gscale-bar';d.style.marginTop='8px';d.style.paddingTop='8px';d.style.borderTop='2px solid #000';d.innerHTML='<strong id=\"khub-gscale-lbl\">Current Global & App Zoom: '+savedPct+'%</strong> &mdash; '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(100)\">100%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(115)\">115%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(125)\">125%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(135)\">135%</button> '+'<button type=\"button\" class=\"btn-sm\" onclick=\"setKhubGameScalePct(150)\">150%</button>';box.appendChild(d);}},200);})();",
       "html": "<div style='padding:14px;text-align:left;'><h3>All-Games Zoom &amp; Scale Booster</h3><p>Scales up all built-in and downloaded Store games by your chosen percentage (+15%, +25%, +35%, or +50%).</p><div><button type='button' class='btn-sm' onclick='if(window.setKhubGameScalePct)window.setKhubGameScalePct(115)'>+15% (115%)</button> <button type='button' class='btn-sm btn-selected' onclick='if(window.setKhubGameScalePct)window.setKhubGameScalePct(125)'>+25% (125%)</button> <button type='button' class='btn-sm' onclick='if(window.setKhubGameScalePct)window.setKhubGameScalePct(135)'>+35% (135%)</button> <button type='button' class='btn-sm' onclick='if(window.setKhubGameScalePct)window.setKhubGameScalePct(150)'>+50% (150%)</button></div></div>"
     },
     {
@@ -286,6 +286,6 @@
   "jsonbinBinId": "6ae7e238ffd5d160539e3ace",
   "jsonbinApiKey": "$2a$10$dmsG1/GXWAA5tim8ejcE8uKD75pB.KxZxZDzIAb4AdPcJAU93f9nK",
   "cloudStatusUrl": "https://khub-api.ethananaya351.workers.dev/status",
-  "version": "2.8",
-  "storeVersion": "2.8"
+  "version": "2.9",
+  "storeVersion": "2.9"
 }
