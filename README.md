@@ -141,9 +141,3 @@ If you are hosting your own fork or managing the KHub fleet:
 1. Create a Cloudflare Worker (e.g., `khub-api.ethananaya351.workers.dev`) and bind a KV Namespace named **`KHUB_KV`**.
 2. Paste the contents of **`worker.js`** into your Cloudflare Worker and deploy.
 3. Set your secret `ADMIN_PASSWORD` environment variable in Cloudflare Worker settings (default fallback is `khub-admin-2025`).
-
-### 3. Using the Cloud Admin Dashboard (`admin.html`)
-Open `admin.html` (locally or at `https://ethandupe.github.io/KindleHub/admin.html`) and log in with your Admin Password to access:
-* **📊 Fleet Telemetry & Hardware Inspector** — View connected Kindles, firmware versions, battery health, active processes, installed store apps, and AI usage.
-* **🔔 Kindle Popup Notification Manager (35m Poll)** — Broadcast popup alerts to **All Kindles**, a **Specific Firmware / KHub Version** (e.g., `2.7` or `Kindle 5.16`), or a **Specific Kindle ID** (or click the **🔔 Notify** button directly on any device row). Choose between **One-Time** (automatically forgotten once seen by the user) or **Persistent** (shown every 35 minutes until cleared).
-* **⚠️ Force Update Manager (10s Countdown)** — Force Kindles on an older version (e.g., `2.7`) or a specific Kindle ID to immediately display **`Update required. ⚠️`** with a **10-second countdown** that automatically triggers the wireless GitHub update.
