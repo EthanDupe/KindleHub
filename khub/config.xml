@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<widget id="xyz.ethandupe.khub" version="3.0" viewmodes="fullscreen" xmlns="http://www.w3.org/ns/widgets"
+<widget id="xyz.ethandupe.khub" version="3.0" viewmodes="application" xmlns="http://www.w3.org/ns/widgets"
     xmlns:kindle="http://kindle.amazon.com/ns/widget-extensions">
     <name xml:lang="en">KHub</name>
-    <description xml:lang="en">Full-Screen App Launcher, Online App Store, Plugins, Multi-Feed RSS Feed, Tic-Tac-Toe, Lemonade Stand, AI Chat, and Settings for Kindle by EthanDupe (v3.0)</description>
+    <description xml:lang="en">App Launcher, Online App Store, Plugins, Multi-Feed RSS Feed, Tic-Tac-Toe, Lemonade Stand, AI Chat, and Settings for Kindle by EthanDupe (v3.0)</description>
 
     <icon src="icon.png" />
     <content src="index.html" />
@@ -35,8 +35,6 @@
 
     <kindle:chrome>
         <kindle:asset key="configureSearchBar" value="none" />
-        <kindle:asset key="hasTitleBar" value="false" />
-        <kindle:asset key="fullScreen" value="true" />
     </kindle:chrome>
 
     <kindle:gestures>
@@ -55,8 +53,6 @@
     <kindle:messaging>
         <kindle:app name="com.lab126.pillow" value="yes" />
         <kindle:app name="com.lab126.chromebar" value="yes" />
-        <kindle:app name="com.lab126.appmgrd" value="yes" />
-        <kindle:app name="com.lab126.winmgr" value="yes" />
         <kindle:app name="com.lab126.wifid" value="yes" />
     </kindle:messaging>
 
@@ -71,6 +67,5 @@
         <kindle:setting name="internetRequired" value="no" />
         <kindle:setting name="saveContext" value="no" />
         <kindle:setting name="disable-wua-features" value="yes" />
-        <kindle:setting name="fullScreen" value="yes" />
     </kindle:settings>
 </widget>
