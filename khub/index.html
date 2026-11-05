@@ -3693,47 +3693,49 @@
 
         /* Full-Screen Kindle Chrome / Back Bar Suppressor (v3.0):
            Hides the Kindle system top bar / back button so KHub runs as a true full-screen native app */
+      var hasSentLocalFullscreenCmd = false;
         function enforceKindleFullScreenMode() {
             try {
                 if (typeof window.kindle !== "undefined" && window.kindle) {
+                    if (window.kindle.messaging && typeof window.kindle.messaging.sendStringMessage === "function") {
+                        try {
+                            window.kindle.messaging.sendStringMessage(
+                                "com.lab126.pillow",
+                                "interrogatePillow",
+                                '{"pillowId":"search_bar","function":"nativeBridge.hideMe()"}'
+                            );
+                        } catch (e1) {}
+                        try {
+                            window.kindle.messaging.sendStringMessage(
+                                "com.lab126.pillow",
+                                "interrogatePillow",
+                                '{"pillowId":"default_status_bar","function":"nativeBridge.hideMe()"}'
+                            );
+                        } catch (e2) {}
+                        try {
+                            window.kindle.messaging.sendStringMessage(
+                                "com.lab126.pillow",
+                                "customDialog",
+                                '{"name":"configureChrome","searchBar":"none","titleBar":"none"}'
+                            );
+                        } catch (e3) {}
+                    }
                     if (window.kindle.chrome) {
-                        if (typeof window.kindle.chrome.setTitleBar === "function") {
-                            window.kindle.chrome.setTitleBar("", "");
-                        }
-                        if (typeof window.kindle.chrome.configureSearchBar === "function") {
-                            window.kindle.chrome.configureSearchBar("none");
-                        }
-                        if (typeof window.kindle.chrome.configureChrome === "function") {
-                            window.kindle.chrome.configureChrome({
-                                appId: "xyz.ethandupe.khub",
-                                searchBar: "none",
-                                titleBar: "none",
-                                fullScreen: true
-                            });
-                        }
+                        try {
+                            if (typeof window.kindle.chrome.setTitleBar === "function") {
+                                window.kindle.chrome.setTitleBar("", "");
+                            }
+                        } catch (e4) {}
                     }
-                    if (window.kindle.messaging) {
-                        var chromeCfgJson = '{"appId":"xyz.ethandupe.khub","searchBar":"none","titleBar":"none","fullScreen":true}';
-                        var pillowDialogJson = '{"name":"configureChrome","searchBar":"none","titleBar":"none","fullScreen":true}';
-                        if (typeof window.kindle.messaging.sendStringMessage === "function") {
-                            try { window.kindle.messaging.sendStringMessage("com.lab126.pillow", "configureChrome", chromeCfgJson); } catch (e1) {}
-                            try { window.kindle.messaging.sendStringMessage("com.lab126.pillow", "customDialog", pillowDialogJson); } catch (e2) {}
-                            try { window.kindle.messaging.sendStringMessage("com.lab126.chromebar", "configureChrome", chromeCfgJson); } catch (e3) {}
-                        }
-                        if (typeof window.kindle.messaging.sendMessage === "function") {
-                            try {
-                                window.kindle.messaging.sendMessage("com.lab126.chromebar", "configureChrome", {
-                                    appId: "xyz.ethandupe.khub",
-                                    searchBar: "none",
-                                    titleBar: "none",
-                                    fullScreen: true
-                                });
-                            } catch (e4) {}
-                        }
-                    }
+                }
+                if (!hasSentLocalFullscreenCmd) {
+                    hasSentLocalFullscreenCmd = true;
+                    var helperBase = lastKnownKindleIp ? ("http://" + lastKnownKindleIp + ":8088") : LOCAL_HELPER_URL;
+                    loadScriptBridge(helperBase + "/cgi-bin/khub.cgi?action=enter_fullscreen&jsonp=1");
                 }
             } catch (e) {}
         }
+        
 
         /* Cleanly exits full-screen KHub and returns to the Kindle Home / Library screen */
         function exitKhubToKindleHome() {
