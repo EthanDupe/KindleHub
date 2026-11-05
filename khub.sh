@@ -948,14 +948,31 @@ if [ "$ACTION" = "write_chunk" ]; then
     exit 0
 fi
 
-# Cleanly exit KHub full-screen app and return to the native Kindle Home / Library screen
+# Hide Kindle Pillow search_bar (Back button) & status_bar for true Full-Screen KHub mode
+if [ "$ACTION" = "enter_fullscreen" ]; then
+    if command -v lipc-set-prop >/dev/null 2>&1; then
+        lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"search_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+        lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"default_status_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+    fi
+    if [ -n "$JSONP_PARAM" ]; then
+        printf "Content-Type: application/javascript; charset=utf-8\r\nCache-Control: no-store\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+        printf "window.__khubFullscreenActive = true;\n"
+    else
+        printf "Content-Type: application/json; charset=utf-8\r\nCache-Control: no-store\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+        printf "{\"ok\":true,\"fullscreen\":true}\n"
+    fi
+    exit 0
+fi
+
+# Cleanly exit KHub full-screen app, restore Kindle top chrome, and return to the native Kindle Home / Library screen
 if [ "$ACTION" = "exit_khub" ]; then
     (
         sleep 0.2
         if command -v lipc-set-prop >/dev/null 2>&1; then
-            lipc-set-prop com.lab126.pillow configureChrome '{"appId":"xyz.ethandupe.khub","searchBar":"system","titleBar":"system","fullScreen":false}' 2>/dev/null
-            lipc-set-prop com.lab126.appmgrd stop app://xyz.ethandupe.khub 2>/dev/null
+            lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"default_status_bar","function":"nativeBridge.showMe()"}' 2>/dev/null
+            lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"search_bar","function":"nativeBridge.showMe()"}' 2>/dev/null
             lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home 2>/dev/null
+            lipc-set-prop com.lab126.appmgrd stop app://xyz.ethandupe.khub 2>/dev/null
         fi
         if command -v lipc-send-event >/dev/null 2>&1; then
             lipc-send-event com.lab126.hal homeButtonPressed 2>/dev/null
@@ -1578,7 +1595,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(st).encode("utf-8"))
             return
 
-        if parsed.path in ("/store_catalog", "/check_update", "/verify_version", "/ota_file", "/exit_khub") or action in ("store_catalog", "check_update", "cloud_status", "cloud_notifications", "cloud_heartbeat", "exit_khub", "verify_version", "ota_file", "write_chunk", "streetpass_card", "streetpass_scan"):
+        if parsed.path in ("/store_catalog", "/check_update", "/verify_version", "/ota_file", "/exit_khub", "/enter_fullscreen") or action in ("store_catalog", "check_update", "cloud_status", "cloud_notifications", "cloud_heartbeat", "exit_khub", "enter_fullscreen", "verify_version", "ota_file", "write_chunk", "streetpass_card", "streetpass_scan"):
             try:
                 out = subprocess.check_output("/tmp/khub_www/cgi-bin/khub.cgi", shell=True, env=dict(os.environ, QUERY_STRING=parsed.query))
                 body = out.split(b"\r\n\r\n", 1)[-1] if b"\r\n\r\n" in out else out
@@ -2047,7 +2064,25 @@ INSERT OR REPLACE INTO properties(handlerId,name,value)
   VALUES('$APP_ID','supportedOrientation','U');
 EOF
 
-echo Registered $APP_ID v3.0, you may now launch it with LIPC.
+echo Recho Registered $APP_ID v3.0, you may now launch it with LIPC.echo Registered $APP_ID v3.0, you may now launch it with LIPC.egistered $APP_ID echo Registered $APP_ID v3.0, you may now launch it with LIPC.
+
+# Stop any prior Mesquite instance and clear stale cache so appmgrd never throws an Application Error
+lipc-set-prop com.lab126.appmgrd stop app://$APP_ID 2>/dev/null
+killall mesquite 2>/dev/null
+rm -rf /var/local/mesquite/devkit/resource/appcache/* 2>/dev/null
+sync
+sleep 1
+
+# Launch with LIPC and hide Pillow search_bar (Back button) & status_bar for Full-Screen Mode
+nohup lipc-set-prop com.lab126.appmgrd start app://$APP_ID >/dev/null 2>&1 &
+(
+    sleep 2
+    lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"search_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+    lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"default_status_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+    sleep 2
+    lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"search_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+    lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId":"default_status_bar","function":"nativeBridge.hideMe()"}' 2>/dev/null
+) >/dev/null 2>&1 &v3.0, you may now launch it with LIPC.
 sleep 2
 
 # Launch with LIPC in Full-Screen Mode (hiding the Kindle system chrome / back bar)
